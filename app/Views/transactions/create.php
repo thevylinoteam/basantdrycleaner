@@ -47,7 +47,7 @@
         this.paymentAmount = this.getTotalPrice();
     },
     formatRupiah(num) {
-        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(num || 0);
+        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(num || 0);
     }
 }">
     <!-- Header -->

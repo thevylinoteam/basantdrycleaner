@@ -22,7 +22,7 @@ $routes->get('/logout', 'Auth::logout');
 // Public Order Tracking (No Auth Required)
 $routes->get('/track', 'TrackController::index');
 $routes->post('/track/check', 'TrackController::check');
-$routes->get('/track/check', 'TrackController::check');
+$routes->get('/track/check', 'TrackController::index');
 
 // Protected Backend Routes (Requires Auth Filter)
 $routes->group('', ['filter' => 'auth'], static function ($routes) {

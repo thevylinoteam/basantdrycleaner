@@ -22,7 +22,7 @@ function basant_label(string $value): string
         'belum_bayar' => 'Unpaid', 'dp' => 'Partially Paid', 'lunas' => 'Paid',
         'kiloan' => 'Per kg', 'satuan' => 'Per item', 'ekspres' => 'Express',
         'kasir' => 'Cashier', 'admin' => 'Administrator',
-        'cash' => 'Cash', 'transfer' => 'Bank Transfer / UPI',
+        'cash' => 'Cash', 'tunai' => 'Cash', 'transfer' => 'Bank Transfer / UPI',
     ][$value] ?? ucwords(str_replace('_', ' ', $value));
 }
 

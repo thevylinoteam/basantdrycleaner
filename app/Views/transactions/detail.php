@@ -299,7 +299,7 @@
                             <i data-lucide="alert-triangle" class="w-4 h-4"></i>
                             Peringatan Bisnis (FR-26)
                         </p>
-                        <p class="mt-1">Cucian <strong>cannot be marked completed or collected</strong> because the outstanding balance is <strong class="font-mono">₹ <?= number_format($transaction['balance_due'], 2, '.', ',') ?></strong>. Record payment first.</p>
+                        <p class="mt-1">This order <strong>cannot be marked completed or collected</strong> because the outstanding balance is <strong class="font-mono">₹ <?= number_format($transaction['balance_due'], 2, '.', ',') ?></strong>. Record payment first.</p>
                     </div>
 
                     <div>

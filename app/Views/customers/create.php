@@ -25,7 +25,7 @@
             <div>
                 <label for="phone" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">WhatsApp / Mobile Number *</label>
                 <input type="text" name="phone" id="phone" required placeholder="Example: 9876543210" value="<?= old('phone') ?>" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                <p class="text-[11px] text-gray-400 mt-1">Customers use this number for order tracking.</p>
+                <p class="text-[11px] text-gray-400 mt-1">Customers use this number together with their order code to track orders.</p>
             </div>
 
             <div>

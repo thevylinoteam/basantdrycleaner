@@ -11,25 +11,27 @@
     <div class="text-center space-y-3">
         <h1 class="text-3xl sm:text-4xl font-extrabold text-navy-700 dark:text-white font-poppins tracking-tight">Track Your Order</h1>
         <p class="text-sm text-gray-500 dark:text-gray-400 max-w-lg mx-auto">
-            Track your laundry order using its order code or registered mobile number.
+            For your privacy, enter both the order code and registered mobile number.
         </p>
     </div>
 
     <!-- Search Card -->
     <div class="rounded-[20px] bg-white dark:bg-navy-800 p-6 sm:p-8 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
-        <form action="<?= base_url('track/check') ?>" method="GET" class="space-y-4">
+        <form action="<?= base_url('track/check') ?>" method="POST" class="space-y-4">
+            <?= csrf_field() ?>
             <div>
                 <label for="keyword" class="block text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 mb-2">
-                    Order Code / Mobile Number:
+                    Order Code:
                 </label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
                         <i data-lucide="search" class="w-5 h-5"></i>
                     </div>
-                    <input type="text" name="keyword" id="keyword" required value="<?= esc($keyword ?? '') ?>" placeholder="Example: LDY-20260812-0001 or 9876543210" class="w-full pl-12 pr-4 py-3.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm sm:text-base font-medium text-navy-700 dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-brand-500">
+                    <input type="text" name="keyword" id="keyword" required value="<?= esc($keyword ?? '') ?>" placeholder="Example: LDY-20260812-0001" class="w-full pl-12 pr-4 py-3.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm sm:text-base font-medium text-navy-700 dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-brand-500">
                 </div>
             </div>
 
+            <div><label for="phone" class="block text-xs font-bold mb-2">Registered Mobile Number</label><input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="9876543210" class="w-full px-4 py-3 rounded-xl bg-lightPrimary dark:bg-navy-900 border border-gray-200 dark:border-navy-700"></div>
             <button type="submit" class="w-full py-3.5 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
                 <i data-lucide="search" class="w-4 h-4"></i>
                 <span>Track Order</span>
@@ -62,7 +64,7 @@
                         <div>
                             <span class="text-xs text-gray-400 font-medium">Order Number:</span>
                             <h3 class="text-xl font-bold font-mono text-brand-500 dark:text-brand-400"><?= esc($tx['transaction_code']) ?></h3>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Customer: <strong class="text-navy-700 dark:text-white"><?= esc($tx['customer_name']) ?></strong></p>
+
                         </div>
                         <div>
                             <?php

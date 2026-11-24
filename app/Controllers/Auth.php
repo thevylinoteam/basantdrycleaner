@@ -30,7 +30,7 @@ class Auth extends BaseController
 
         return $this->response->setJSON([
             'status'  => 'info',
-            'message' => 'Silakan masukkan email dan password untuk login.',
+            'message' => 'Enter your email and password to sign in.',
         ]);
     }
 
@@ -39,6 +39,9 @@ class Auth extends BaseController
      */
     public function attemptLogin()
     {
+        if (!service('throttler')->check('basant-login-' . hash('sha256', $this->request->getIPAddress()), 10, 60)) {
+            return $this->response->setStatusCode(429)->setBody('Too many sign-in attempts. Please try again in a minute.');
+        }
         $rules = [
             'email'    => 'required|valid_email',
             'password' => 'required',
@@ -103,12 +106,12 @@ class Auth extends BaseController
         session()->destroy();
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/login')->with('success', 'Anda telah berhasil logout.');
+            return redirect()->to('/login')->with('success', 'You have signed out.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Logout berhasil. Sesi telah diakhiri.',
+            'message' => 'Signed out. Session ended.',
         ]);
     }
 
@@ -126,7 +129,7 @@ class Auth extends BaseController
         if (!$user) {
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'User tidak ditemukan.',
+                'message' => 'User not found.',
             ])->setStatusCode(404);
         }
 
@@ -178,7 +181,7 @@ class Auth extends BaseController
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Password saat ini salah.',
+                'message' => 'Current password is incorrect.',
             ])->setStatusCode(400);
         }
 
@@ -192,7 +195,7 @@ class Auth extends BaseController
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Password berhasil diperbarui.',
+            'message' => 'Password updated.',
         ]);
     }
 }

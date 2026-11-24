@@ -400,12 +400,12 @@
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" @click.outside="open = false" class="p-2 text-gray-600 dark:text-gray-300 hover:text-navy-700 dark:hover:text-white rounded-full transition-colors relative" title="Notifications">
                                 <i data-lucide="bell" class="w-5 h-5"></i>
-                                <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-brand-500"></span>
+                                
                             </button>
                             <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute right-0 mt-3 w-80 sm:w-96 rounded-[20px] bg-white dark:bg-navy-800 p-4 shadow-3xl shadow-shadow-500 dark:shadow-none border border-gray-100 dark:border-white/10 z-50">
                                 <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-white/10">
-                                    <p class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Order Notifications</p>
-                                    <span class="text-xs font-semibold text-brand-500">3 New</span>
+                                    <p class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Order Shortcuts</p>
+                                    
                                 </div>
                                 <div class="mt-3 space-y-2.5 text-xs max-h-72 overflow-y-auto">
                                     <!-- Notification 1 -->
@@ -416,9 +416,9 @@
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
                                                 <p class="font-bold text-navy-700 dark:text-white">Orders Ready for Collection</p>
-                                                <span class="text-[10px] text-gray-400">Just now</span>
+                                                
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Packed orders are ready for collection.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">View orders ready for collection.</p>
                                         </div>
                                     </a>
 
@@ -429,10 +429,10 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Payment Received</p>
-                                                <span class="text-[10px] text-gray-400">10 minutes ago</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">Paid Orders</p>
+                                                
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Order payments have been recorded.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">View fully paid orders.</p>
                                         </div>
                                     </a>
 
@@ -443,10 +443,10 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Schedule Reminder</p>
-                                                <span class="text-[10px] text-gray-400">Today</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">All Orders</p>
+                                                
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Check orders nearing completion.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Review order progress.</p>
                                         </div>
                                     </a>
                                 </div>
@@ -498,7 +498,7 @@
                             <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="check-circle" class="w-5 h-5"></i>
                             </div>
-                            <p class="text-sm font-semibold"><?= session()->getFlashdata('success') ?></p>
+                            <p class="text-sm font-semibold"><?= esc(session()->getFlashdata('success')) ?></p>
                         </div>
                         <button @click="show = false" class="text-emerald-500 hover:text-emerald-700 p-1">
                             <i data-lucide="x" class="w-4 h-4"></i>
@@ -512,7 +512,7 @@
                             <div class="w-8 h-8 rounded-full bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="alert-circle" class="w-5 h-5"></i>
                             </div>
-                            <p class="text-sm font-semibold"><?= session()->getFlashdata('error') ?></p>
+                            <p class="text-sm font-semibold"><?= esc(session()->getFlashdata('error')) ?></p>
                         </div>
                         <button @click="show = false" class="text-rose-500 hover:text-rose-700 p-1">
                             <i data-lucide="x" class="w-4 h-4"></i>
@@ -539,7 +539,7 @@
                 <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 dark:border-white/10">
                     <div class="flex items-center gap-3">
                         <img src="<?= 'https://basantdrycleaners.com/wp-content/uploads/2022/02/basantdrycleaners.png' ?>" alt="Logo" class="w-9 h-9 object-contain bg-white rounded-lg">
-                        <span class="font-poppins font-bold text-lg text-navy-700 dark:text-white">HORIZON <span class="font-normal text-brand-500">LAUNDRY</span></span>
+                        <span class="font-poppins font-bold text-lg text-navy-700 dark:text-white">BASANT <span class="font-normal text-brand-500">DRY CLEANERS</span></span>
                     </div>
                     <button @click="sidebarOpen = false" class="p-2 text-gray-500 dark:text-gray-400 hover:text-navy-700 dark:hover:text-white">
                         <i data-lucide="x" class="w-5 h-5"></i>
