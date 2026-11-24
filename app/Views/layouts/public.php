@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? 'Cek Status Cucian - Horizon Laundry') ?></title>
+    <title><?= esc($title ?? 'Track Your Order - Basant Dry Cleaners') ?></title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?= base_url('logo-laundry.png') ?>">
@@ -115,10 +115,10 @@
     <header class="sticky top-3 z-30 mx-4 sm:mx-6 lg:mx-auto max-w-5xl w-full mt-3">
         <div class="px-5 py-3 rounded-2xl bg-white/80 dark:bg-navy-800/80 backdrop-blur-xl shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo Horizon Laundry" class="w-10 h-10 object-cover rounded-full drop-shadow-md">
+                <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo Basant Dry Cleaners" class="w-10 h-10 object-contain bg-white rounded-lg drop-shadow-md">
                 <div>
-                    <h1 class="font-poppins font-bold text-base text-navy-700 dark:text-white leading-none">Horizon <span class="text-brand-500 font-normal">Laundry</span></h1>
-                    <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">Pelacakan Status Cucian Real-Time</p>
+                    <h1 class="font-poppins font-bold text-base text-navy-700 dark:text-white leading-none">Basant <span class="text-brand-500 font-normal">Dry Cleaners</span></h1>
+                    <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">Real-time Order Tracking</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -145,7 +145,7 @@
 
     <!-- Footer -->
     <footer class="mt-auto py-6 text-center text-xs text-gray-500 dark:text-gray-400 font-medium">
-        <p>&copy; <?= date('Y') ?> Horizon Laundry UI. All Rights Reserved.</p>
+        <p>&copy; <?= date('Y') ?> Basant Dry Cleaners. All Rights Reserved.</p>
     </footer>
 
     <script>
