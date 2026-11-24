@@ -4,7 +4,7 @@
 <div class="mt-8 lg:mt-16 w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
     <!-- Brand Header -->
     <div class="flex items-center gap-3 mb-6">
-        <img src="<?= base_url('logo-laundry.png') ?>" alt="Basant Dry Cleaners logo" class="w-11 h-11 object-contain bg-white rounded-lg drop-shadow">
+        <img src="<?= 'https://basantdrycleaners.com/wp-content/uploads/2022/02/basantdrycleaners.png' ?>" alt="Basant Dry Cleaners logo" class="w-11 h-11 object-contain bg-white rounded-lg drop-shadow">
         <div>
             <h2 class="font-poppins text-lg font-bold text-navy-700 dark:text-white leading-none">Basant <span class="text-brand-500 font-normal">Dry Cleaners</span></h2>
             <span class="text-[11px] text-gray-400 font-medium">Staff & Admin Portal</span>
