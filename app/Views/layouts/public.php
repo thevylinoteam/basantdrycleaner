@@ -6,7 +6,7 @@
     <title><?= esc($title ?? 'Track Your Order - Basant Dry Cleaners') ?></title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?= base_url('logo-laundry.png') ?>">
+    <link rel="icon" type="image/png" href="<?= 'https://basantdrycleaners.com/wp-content/uploads/2022/02/basantdrycleaners.png' ?>">
     
     <!-- Google Fonts: DM Sans & Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,19 +36,19 @@
                     },
                     colors: {
                         lightPrimary: '#F4F7FE',
-                        blueSecondary: '#4318FF',
-                        brandLinear: '#868CFF',
+                        blueSecondary: '#1CB6FC',
+                        brandLinear: '#89B92E',
                         brand: {
-                            50: '#E9E3FF',
-                            100: '#C0B8FE',
-                            200: '#A195FD',
-                            300: '#8171FC',
-                            400: '#7551FF',
-                            500: '#422AFB',
-                            600: '#3311DB',
-                            700: '#2111A5',
-                            800: '#190793',
-                            900: '#11047A',
+                            50: '#E5F7FF',
+                            100: '#BAEAFE',
+                            200: '#8DDCFC',
+                            300: '#55CBFC',
+                            400: '#1CB6FC',
+                            500: '#0876AE',
+                            600: '#086496',
+                            700: '#14517C',
+                            800: '#183862',
+                            900: '#112B4C',
                         },
                         navy: {
                             50: '#d0dcfb',
@@ -115,7 +115,7 @@
     <header class="sticky top-3 z-30 mx-4 sm:mx-6 lg:mx-auto max-w-5xl w-full mt-3">
         <div class="px-5 py-3 rounded-2xl bg-white/80 dark:bg-navy-800/80 backdrop-blur-xl shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo Basant Dry Cleaners" class="w-10 h-10 object-contain bg-white rounded-lg drop-shadow-md">
+                <img src="<?= 'https://basantdrycleaners.com/wp-content/uploads/2022/02/basantdrycleaners.png' ?>" alt="Logo Basant Dry Cleaners" class="w-10 h-10 object-contain bg-white rounded-lg drop-shadow-md">
                 <div>
                     <h1 class="font-poppins font-bold text-base text-navy-700 dark:text-white leading-none">Basant <span class="text-brand-500 font-normal">Dry Cleaners</span></h1>
                     <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">Real-time Order Tracking</p>
