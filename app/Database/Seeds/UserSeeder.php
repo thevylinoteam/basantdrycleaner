@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $data = [
             [
                 'name'       => 'Basant Administrator',
-                'email'      => 'admin@laundry.com',
+                'email'      => ENVIRONMENT === 'testing' ? 'admin@laundry.com' : (getenv('BASANT_ADMIN_EMAIL') ?: 'thevylinoteam@gmail.com'),
                 'password'   => password_hash($adminPassword, PASSWORD_BCRYPT),
                 'role'       => 'admin',
                 'created_at' => date('Y-m-d H:i:s'),
