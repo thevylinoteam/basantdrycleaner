@@ -28,7 +28,7 @@
                     <?= str_replace('_', ' ', $transaction['payment_status']) ?>
                 </span>
             </div>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Dibuat pada <?= date('d F Y, H:i', strtotime($transaction['created_at'])) ?> oleh kasir <span class="font-bold text-navy-700 dark:text-white"><?= esc($transaction['user_name'] ?? 'Admin') ?></span></p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Created on <?= date('d F Y, H:i', strtotime($transaction['created_at'])) ?> by cashier <span class="font-bold text-navy-700 dark:text-white"><?= esc($transaction['user_name'] ?? 'Admin') ?></span></p>
         </div>
 
         <div class="flex items-center gap-2">
@@ -39,32 +39,32 @@
             <?php if ($transaction['balance_due'] > 0): ?>
                 <button type="button" @click="payModalOpen = true" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold transition-all shadow-lg shadow-brand-500/25">
                     <i data-lucide="credit-card" class="w-3.5 h-3.5"></i>
-                    Bayar Tagihan
+                    Pay Bill
                 </button>
             <?php endif; ?>
             <a href="<?= base_url('transactions/print/' . $transaction['id']) ?>" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white dark:bg-navy-800 hover:bg-lightPrimary dark:hover:bg-navy-700 text-navy-700 dark:text-white text-xs font-bold border border-gray-200 dark:border-navy-700 transition-colors shadow-sm">
                 <i data-lucide="printer" class="w-3.5 h-3.5 text-gray-400"></i>
-                Cetak Nota
+                Print Receipt
             </a>
-            <button type="button" onclick="confirmDelete('<?= base_url('transactions/delete/' . $transaction['id']) ?>', 'Hapus Transaksi', 'Apakah Anda yakin ingin menghapus transaksi ini? Data akan diarsipkan (soft delete).')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-300 text-xs font-bold transition-colors shadow-sm" title="Hapus Transaksi">
+            <button type="button" onclick="confirmDelete('<?= base_url('transactions/delete/' . $transaction['id']) ?>', 'Delete Order', 'Are you sure you want to archive this order?')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-300 text-xs font-bold transition-colors shadow-sm" title="Delete Order">
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                Hapus
+                Delete
             </button>
         </div>
     </div>
 
     <!-- Visual Washing Status Progress Stepper -->
     <div class="rounded-[20px] bg-white dark:bg-navy-800 p-6 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 mb-6">Progres Pengerjaan Cucian</h3>
+        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 mb-6">Order Progress</h3>
         
         <?php
             $stages = [
-                'diterima'     => ['label' => 'Diterima', 'icon' => 'inbox'],
-                'dicuci'       => ['label' => 'Dicuci', 'icon' => 'waves'],
-                'dikeringkan'  => ['label' => 'Dikeringkan', 'icon' => 'wind'],
-                'disetrika'    => ['label' => 'Disetrika', 'icon' => 'zap'],
-                'siap_diambil' => ['label' => 'Siap Diambil', 'icon' => 'package-check'],
-                'selesai'      => ['label' => 'Selesai', 'icon' => 'check-circle-2'],
+                'diterima'     => ['label' => 'Received', 'icon' => 'inbox'],
+                'dicuci'       => ['label' => 'Washing', 'icon' => 'waves'],
+                'dikeringkan'  => ['label' => 'Drying', 'icon' => 'wind'],
+                'disetrika'    => ['label' => 'Ironing', 'icon' => 'zap'],
+                'siap_diambil' => ['label' => 'Ready for Collection', 'icon' => 'package-check'],
+                'selesai'      => ['label' => 'Completed', 'icon' => 'check-circle-2'],
             ];
             $stageKeys = array_keys($stages);
             $currentIdx = array_search($transaction['status'], $stageKeys);
@@ -106,7 +106,7 @@
         <?php if (!empty($transaction['picked_up_at'])): ?>
             <div class="mt-6 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs text-center font-semibold flex items-center justify-center gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
-                Cucian telah diserahkan dan diambil oleh pelanggan pada <?= date('d M Y, H:i', strtotime($transaction['picked_up_at'])) ?>
+                Order was collected by the customer on <?= date('d M Y, H:i', strtotime($transaction['picked_up_at'])) ?>
             </div>
         <?php endif; ?>
     </div>
@@ -120,20 +120,20 @@
                 <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-white/10">
                     <div class="flex items-center gap-2.5">
                         <i data-lucide="user" class="w-4 h-4 text-brand-500"></i>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Informasi Pelanggan</h3>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Customer Information</h3>
                     </div>
                     <?php
                         $cleanPhone = preg_replace('/[^0-9]/', '', $transaction['customer_phone']);
                         $waPhone = str_starts_with($cleanPhone, '0') ? '62' . substr($cleanPhone, 1) : $cleanPhone;
                     ?>
-                    <a href="https://wa.me/<?= $waPhone ?>?text=Halo%20<?= urlencode($transaction['customer_name']) ?>,%20kami%20dari%20Horizon%20Laundry%20mengabarkan%20pesanan%20laundry%20Anda%20(<?= $transaction['transaction_code'] ?>)%20saat%20ini%20statusnya:%20<?= strtoupper($transaction['status']) ?>" target="_blank" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 flex items-center gap-1">
+                    <a href="https://wa.me/<?= $waPhone ?>?text=Hello%20<?= urlencode($transaction['customer_name']) ?>,%20your%20Basant%20Dry%20Cleaners%20order%20(<?= $transaction['transaction_code'] ?>)%20status:%20<?= strtoupper($transaction['status']) ?>" target="_blank" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 flex items-center gap-1">
                         <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
-                        Kirim WhatsApp
+                        Send WhatsApp
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-3 text-xs">
                     <div>
-                        <p class="text-gray-400">Nama Pelanggan:</p>
+                        <p class="text-gray-400">Customer Name:</p>
                         <p class="font-bold text-navy-700 dark:text-white text-sm mt-0.5"><?= esc($transaction['customer_name']) ?></p>
                     </div>
                     <div>
@@ -141,8 +141,8 @@
                         <p class="font-mono font-bold text-navy-700 dark:text-white text-sm mt-0.5"><?= esc($transaction['customer_phone']) ?></p>
                     </div>
                     <div class="col-span-2">
-                        <p class="text-gray-400">Alamat:</p>
-                        <p class="text-navy-700 dark:text-gray-300 mt-0.5"><?= esc($transaction['customer_address'] ?? 'Alamat tidak dicantumkan') ?></p>
+                        <p class="text-gray-400">Address:</p>
+                        <p class="text-navy-700 dark:text-gray-300 mt-0.5"><?= esc($transaction['customer_address'] ?? 'Address not provided') ?></p>
                     </div>
                 </div>
             </div>
@@ -150,14 +150,14 @@
             <!-- Items Breakdown Card -->
             <div class="rounded-[20px] bg-white dark:bg-navy-800 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Rincian Paket & Cucian</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Service & Garment Details</h3>
                 </div>
                 <table class="w-full text-left text-xs">
                     <thead>
                         <tr class="border-b border-gray-100 dark:border-white/10">
-                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Layanan</th>
-                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Jumlah</th>
-                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Tarif Snapshot</th>
+                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Service</th>
+                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Quantity</th>
+                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Unit Price</th>
                             <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Subtotal</th>
                         </tr>
                     </thead>
@@ -185,7 +185,7 @@
 
             <!-- Status History Timeline -->
             <div class="rounded-[20px] bg-white dark:bg-navy-800 p-6 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 mb-4">Riwayat Perubahan Status</h3>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 mb-4">Status History</h3>
                 <div class="space-y-4">
                     <?php foreach ($transaction['histories'] as $h): ?>
                         <div class="flex items-start gap-3">
@@ -197,7 +197,7 @@
                                     <span class="font-bold text-navy-700 dark:text-white capitalize"><?= str_replace('_', ' ', $h['status']) ?></span>
                                     <span class="text-[11px] text-gray-400"><?= date('d M Y, H:i', strtotime($h['created_at'])) ?></span>
                                 </div>
-                                <p class="text-gray-500 dark:text-gray-400 mt-0.5"><?= esc($h['notes'] ?? 'Status diubah') ?> <span class="text-gray-400">oleh <?= esc($h['changed_by_name'] ?? 'Admin') ?></span></p>
+                                <p class="text-gray-500 dark:text-gray-400 mt-0.5"><?= esc($h['notes'] ?? 'Status updated') ?> <span class="text-gray-400">oleh <?= esc($h['changed_by_name'] ?? 'Admin') ?></span></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -209,19 +209,19 @@
         <div class="space-y-6">
             <!-- Payment Card -->
             <div class="rounded-[20px] bg-white dark:bg-navy-800 p-5 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5 space-y-4">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 pb-2 border-b border-gray-100 dark:border-white/10">Ringkasan Pembayaran</h3>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 pb-2 border-b border-gray-100 dark:border-white/10">Payment Summary</h3>
 
                 <div class="space-y-2.5 text-xs">
                     <div class="flex justify-between text-gray-500 dark:text-gray-400">
-                        <span>Total Tagihan:</span>
+                        <span>Total Bill:</span>
                         <span class="font-bold text-navy-700 dark:text-white font-mono text-sm">Rp <?= number_format($transaction['total_price'], 0, ',', '.') ?></span>
                     </div>
                     <div class="flex justify-between text-gray-500 dark:text-gray-400">
-                        <span>Total Dibayar:</span>
+                        <span>Total Paid:</span>
                         <span class="font-bold text-emerald-500 font-mono text-sm">Rp <?= number_format($transaction['total_paid'], 0, ',', '.') ?></span>
                     </div>
                     <div class="pt-2.5 border-t border-gray-100 dark:border-white/10 flex justify-between items-center">
-                        <span class="font-bold text-navy-700 dark:text-white">Sisa Tagihan:</span>
+                        <span class="font-bold text-navy-700 dark:text-white">Outstanding Balance:</span>
                         <span class="font-extrabold text-base font-mono <?= $transaction['balance_due'] > 0 ? 'text-rose-500' : 'text-gray-400' ?>">
                             Rp <?= number_format($transaction['balance_due'], 0, ',', '.') ?>
                         </span>
@@ -231,14 +231,14 @@
                 <?php if ($transaction['balance_due'] > 0): ?>
                     <button type="button" @click="payModalOpen = true" class="w-full py-3 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-1.5">
                         <i data-lucide="plus" class="w-4 h-4"></i>
-                        Input Pembayaran
+                        Record Payment
                     </button>
                 <?php endif; ?>
 
                 <!-- Payment Records -->
                 <?php if (!empty($transaction['payments'])): ?>
                     <div class="pt-3 border-t border-gray-100 dark:border-white/10">
-                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-2">Riwayat Kas Masuk:</p>
+                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-2">Payment History:</p>
                         <div class="space-y-2">
                             <?php foreach ($transaction['payments'] as $p): ?>
                                 <div class="p-2.5 rounded-xl bg-lightPrimary dark:bg-navy-900 text-[11px] flex justify-between items-center">
@@ -259,7 +259,7 @@
                 <div class="rounded-[20px] bg-amber-50/60 dark:bg-amber-950/30 p-5 border border-amber-200/60 dark:border-amber-800/40 text-xs">
                     <h3 class="font-bold text-amber-900 dark:text-amber-300 mb-1 flex items-center gap-1.5">
                         <i data-lucide="sticky-note" class="w-4 h-4 text-amber-500"></i>
-                        Catatan Transaksi
+                        Order Notes
                     </h3>
                     <p class="text-amber-800 dark:text-amber-200 leading-relaxed"><?= nl2br(esc($transaction['notes'])) ?></p>
                 </div>
@@ -273,7 +273,7 @@
         <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 flex items-center justify-center">
             <div x-show="statusModalOpen" x-transition class="relative transform overflow-hidden rounded-[20px] bg-white dark:bg-navy-800 p-6 text-left shadow-3xl shadow-shadow-500 dark:shadow-none transition-all w-full max-w-md border border-white/40 dark:border-white/10">
                 <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-white/10">
-                    <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Perbarui Status Pengerjaan</h3>
+                    <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Update Order Status</h3>
                     <button type="button" @click="statusModalOpen = false" class="text-gray-400 hover:text-navy-700 dark:hover:text-white">
                         <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
@@ -282,14 +282,14 @@
                 <form action="<?= base_url('transactions/updateStatus/' . $transaction['id']) ?>" method="POST" class="space-y-4 mt-4">
                     <?= csrf_field() ?>
                     <div>
-                        <label for="status" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Status Baru *</label>
+                        <label for="status" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">New Status *</label>
                         <select name="status" id="status" x-model="selectedStatus" required class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                            <option value="diterima">1. Diterima</option>
-                            <option value="dicuci">2. Dicuci</option>
-                            <option value="dikeringkan">3. Dikeringkan</option>
-                            <option value="disetrika">4. Disetrika</option>
-                            <option value="siap_diambil">5. Siap Diambil</option>
-                            <option value="selesai">6. Selesai / Diambil Pelanggan</option>
+                            <option value="diterima">1. Received</option>
+                            <option value="dicuci">2. Washing</option>
+                            <option value="dikeringkan">3. Drying</option>
+                            <option value="disetrika">4. Ironing</option>
+                            <option value="siap_diambil">5. Ready for Collection</option>
+                            <option value="selesai">6. Completed / Collected</option>
                         </select>
                     </div>
 
@@ -297,23 +297,23 @@
                     <div x-show="selectedStatus === 'selesai' && balanceDue > 0" class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs">
                         <p class="font-bold flex items-center gap-1.5">
                             <i data-lucide="alert-triangle" class="w-4 h-4"></i>
-                            Peringatan Bisnis (FR-26)
+                            Payment Required
                         </p>
-                        <p class="mt-1">Cucian <strong>tidak dapat ditandai selesai/diambil</strong> karena masih ada sisa tagihan sebesar <strong class="font-mono">Rp <?= number_format($transaction['balance_due'], 0, ',', '.') ?></strong>. Silakan input pembayaran terlebih dahulu.</p>
+                        <p class="mt-1">Order <strong>cannot be marked completed or collected</strong> because there is an outstanding balance of <strong class="font-mono">Rp <?= number_format($transaction['balance_due'], 0, ',', '.') ?></strong>. Please record the payment first.</p>
                     </div>
 
                     <div>
-                        <label for="notes" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Catatan Tambahan (Opsional)</label>
-                        <input type="text" name="notes" id="notes" placeholder="Contoh: Selesai disetrika, dipacking rapi" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
+                        <label for="notes" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Additional Notes (Optional)</label>
+                        <input type="text" name="notes" id="notes" placeholder="e.g. Ironed and packed neatly" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                     </div>
 
                     <div class="pt-3 flex justify-end gap-2">
                         <button type="button" @click="statusModalOpen = false" class="px-4 py-2.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-600 dark:text-gray-300 text-xs font-bold transition-colors">
-                            Batal
+                            Cancel
                         </button>
                         <button type="submit" :disabled="selectedStatus === 'selesai' && balanceDue > 0" class="px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 disabled:opacity-40 disabled:hover:bg-brand-500 text-white text-xs font-bold shadow-lg shadow-brand-500/25 transition-all flex items-center gap-1.5">
                             <i data-lucide="check" class="w-4 h-4"></i>
-                            Simpan Perubahan
+                            Save Changes
                         </button>
                     </div>
                 </form>
@@ -327,7 +327,7 @@
         <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 flex items-center justify-center">
             <div x-show="payModalOpen" x-transition class="relative transform overflow-hidden rounded-[20px] bg-white dark:bg-navy-800 p-6 text-left shadow-3xl shadow-shadow-500 dark:shadow-none transition-all w-full max-w-md border border-white/40 dark:border-white/10">
                 <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-white/10">
-                    <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Pencatatan Pembayaran</h3>
+                    <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Record Payment</h3>
                     <button type="button" @click="payModalOpen = false" class="text-gray-400 hover:text-navy-700 dark:hover:text-white">
                         <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
@@ -337,29 +337,29 @@
                     <?= csrf_field() ?>
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
-                            <label for="amount" class="block text-xs font-bold text-navy-700 dark:text-white">Jumlah Bayar (Rp) *</label>
+                            <label for="amount" class="block text-xs font-bold text-navy-700 dark:text-white">Payment Amount (Rp) *</label>
                             <button type="button" @click="$refs.payInput.value = balanceDue" class="text-xs font-bold text-brand-500 hover:underline">
-                                Bayar Lunas (Sisa Rp <?= number_format($transaction['balance_due'], 0, ',', '.') ?>)
+                                Pay in Full (Remaining Rp <?= number_format($transaction['balance_due'], 0, ',', '.') ?>)
                             </button>
                         </div>
                         <input type="number" name="amount" id="amount" x-ref="payInput" required min="1000" :max="balanceDue" value="<?= (float)$transaction['balance_due'] ?>" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-mono font-bold text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                     </div>
 
                     <div>
-                        <label for="method" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Metode Bayar *</label>
+                        <label for="method" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Payment Method *</label>
                         <select name="method" id="method" required class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                            <option value="tunai">Tunai / Cash</option>
-                            <option value="transfer">Transfer Bank / QRIS</option>
+                            <option value="tunai">Cash</option>
+                            <option value="transfer">Bank Transfer / QRIS</option>
                         </select>
                     </div>
 
                     <div class="pt-3 flex justify-end gap-2">
                         <button type="button" @click="payModalOpen = false" class="px-4 py-2.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-600 dark:text-gray-300 text-xs font-bold transition-colors">
-                            Batal
+                            Cancel
                         </button>
                         <button type="submit" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-lg shadow-brand-500/25 transition-all flex items-center gap-1.5">
                             <i data-lucide="check" class="w-4 h-4"></i>
-                            Simpan Pembayaran
+                            Save Payment
                         </button>
                     </div>
                 </form>

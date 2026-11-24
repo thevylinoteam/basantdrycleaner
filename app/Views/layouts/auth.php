@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? 'Masuk - Horizon Laundry Management') ?></title>
+    <title><?= esc($title ?? 'Sign In - Basant Dry Cleaners') ?></title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?= base_url('logo-laundry.png') ?>">
+    <link rel="icon" type="image/webp" href="<?= base_url('basant-brand.webp') ?>">
     
     <!-- Google Fonts: DM Sans & Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,19 +36,19 @@
                     },
                     colors: {
                         lightPrimary: '#F4F7FE',
-                        blueSecondary: '#4318FF',
-                        brandLinear: '#868CFF',
+                        blueSecondary: '#1CB6FC',
+                        brandLinear: '#89B92E',
                         brand: {
-                            50: '#E9E3FF',
-                            100: '#C0B8FE',
-                            200: '#A195FD',
-                            300: '#8171FC',
-                            400: '#7551FF',
-                            500: '#422AFB',
-                            600: '#3311DB',
-                            700: '#2111A5',
-                            800: '#190793',
-                            900: '#11047A',
+                            50: '#E8F7FE',
+                            100: '#C1EAFE',
+                            200: '#9BDDFE',
+                            300: '#70CFFC',
+                            400: '#36B7F3',
+                            500: '#087CB7',
+                            600: '#08699D',
+                            700: '#15527F',
+                            800: '#183862',
+                            900: '#102747',
                         },
                         navy: {
                             50: '#d0dcfb',
@@ -107,7 +107,7 @@
                 <div class="mt-4 lg:pt-8 w-max">
                     <a href="<?= base_url('track') ?>" class="flex items-center gap-2 text-xs font-semibold text-gray-500 hover:text-navy-700 dark:hover:text-white transition-colors">
                         <i data-lucide="chevron-left" class="w-4 h-4 text-gray-400"></i>
-                        <span>Kembali ke Cek Status Cucian</span>
+                        <span>Back to Order Tracking</span>
                     </a>
                 </div>
 
@@ -117,10 +117,10 @@
 
             <!-- Auth Footer -->
             <div class="mt-6 flex flex-col items-center justify-between gap-2 px-5 text-xs text-gray-400 md:flex-row md:px-0 lg:max-w-[48%]">
-                <p>&copy; <?= date('Y') ?> Horizon Laundry. All Rights Reserved.</p>
+                <p>&copy; <?= date('Y') ?> Basant Dry Cleaners. All Rights Reserved.</p>
                 <div class="flex items-center gap-4">
-                    <a href="<?= base_url('track') ?>" class="hover:text-brand-500">Lacak Cucian</a>
-                    <a href="#" class="hover:text-brand-500">Bantuan</a>
+                    <a href="<?= base_url('track') ?>" class="hover:text-brand-500">Track Order</a>
+                    <a href="#" class="hover:text-brand-500">Help</a>
                 </div>
             </div>
         </div>
@@ -134,11 +134,11 @@
 
                 <div class="relative z-10 text-center px-12 text-white max-w-lg">
                     <div class="inline-flex h-24 w-24 items-center justify-center rounded-3xl bg-white/15 backdrop-blur-xl border border-white/25 mb-6 shadow-2xl p-3.5">
-                        <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo Horizon Laundry" class="w-full h-full object-cover rounded-2xl drop-shadow-md">
+                        <img src="<?= base_url('basant-brand.webp') ?>" alt="Basant Dry Cleaners" class="w-24 h-14 object-contain bg-white rounded-lg p-1">
                     </div>
-                    <h2 class="font-poppins text-3xl xl:text-4xl font-bold tracking-tight text-white drop-shadow-sm">Horizon Laundry Hub</h2>
+                    <h2 class="font-poppins text-3xl xl:text-4xl font-bold tracking-tight text-white drop-shadow-sm">Basant Dry Cleaners</h2><p class="text-white/80 text-sm mt-2">Serving Satna Since 1969</p>
                     <p class="mt-4 text-sm xl:text-base text-brand-100/90 font-normal leading-relaxed">
-                        Sistem manajemen laundry modern berbasis teknologi pintar. Pantau cucian kiloan & satuan, keuangan, dan status pengerjaan secara real-time.
+                        Manage laundry and dry cleaning orders, payments and progress in real time.
                     </p>
                 </div>
             </div>
