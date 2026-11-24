@@ -149,7 +149,7 @@ class TransactionController extends BaseController
             if (!$service || !$service['is_active']) {
                 return $this->response->setJSON([
                     'status'  => 'error',
-                    'message' => "Layanan dengan ID {$serviceId} tidak aktif atau tidak ditemukan.",
+                    'message' => "Service ID {$serviceId} is inactive or not found.",
                 ])->setStatusCode(400);
             }
 
@@ -313,11 +313,11 @@ class TransactionController extends BaseController
         // Validate status transition sequence
         if (!$this->transactionModel->isValidStatusTransition($transaction['status'], $newStatus)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->with('error', "Transisi status tidak valid dari '{$transaction['status']}' ke '{$newStatus}'.");
+                return redirect()->back()->with('error', "Invalid status transition from '{$transaction['status']}' to '{$newStatus}'.");
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => "Transisi status tidak valid dari '{$transaction['status']}' ke '{$newStatus}'.",
+                'message' => "Invalid status transition from '{$transaction['status']}' to '{$newStatus}'.",
             ])->setStatusCode(400);
         }
 
@@ -362,12 +362,12 @@ class TransactionController extends BaseController
         $updatedTransaction = $this->transactionModel->getTransactionWithDetails($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/transactions/detail/' . $id)->with('success', "Status cucian berhasil diubah menjadi '{$newStatus}'.");
+            return redirect()->to('/transactions/detail/' . $id)->with('success', "Order status updated successfully.");
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => "Status transaksi berhasil diperbarui menjadi '{$newStatus}'.",
+            'message' => "Order status updated successfully.",
             'data'    => $updatedTransaction,
         ]);
     }
@@ -420,7 +420,7 @@ class TransactionController extends BaseController
         $updatedTransaction = $this->transactionModel->getTransactionWithDetails($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/transactions/detail/' . $id)->with('success', 'Payment of Rp ' . number_format($amount, 0, ',', '.') . ' berhasil dicatat.');
+            return redirect()->to('/transactions/detail/' . $id)->with('success', 'Payment of Rp ' . number_format($amount, 0, ',', '.') . ' recorded successfully.');
         }
 
         return $this->response->setJSON([
@@ -450,12 +450,12 @@ class TransactionController extends BaseController
         $this->transactionModel->delete($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/transactions')->with('success', 'Transaksi berhasil dihapus (soft delete).');
+            return redirect()->to('/transactions')->with('success', 'Order archived successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Transaksi berhasil dihapus (soft delete).',
+            'message' => 'Order archived successfully.',
         ]);
     }
 
@@ -474,8 +474,8 @@ class TransactionController extends BaseController
 
         $receiptPayload = [
             'store' => [
-                'name'    => 'Dry Cleaning Management System',
-                'address' => 'Khermai Road, Railway Colony, Satna, Madhya Pradesh',
+                'name'    => 'Basant Dry Cleaners',
+                'address' => 'Beside Darab Car, Khermai Road, Railway Colony, Satna, Madhya Pradesh',
                 'phone'   => '+91 8871280521',
             ],
             'receipt_number'    => $transaction['transaction_code'],

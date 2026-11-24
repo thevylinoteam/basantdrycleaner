@@ -115,7 +115,7 @@
                                         $badgeClass = $statusBadges[$tx['status']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold capitalize <?= $badgeClass ?>">
-                                        <?= str_replace('_', ' ', $tx['status']) ?>
+                                        <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$tx['status']] ?? str_replace('_', ' ', $tx['status'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
@@ -128,7 +128,7 @@
                                         $pBadge = $payBadges[$tx['payment_status']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider <?= $pBadge ?>">
-                                        <?= str_replace('_', ' ', $tx['payment_status']) ?>
+                                        <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$tx['payment_status']] ?? str_replace('_', ' ', $tx['payment_status'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-gray-400 dark:text-gray-400 text-[11px]">

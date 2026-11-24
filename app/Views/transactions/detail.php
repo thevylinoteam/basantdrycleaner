@@ -25,7 +25,7 @@
                     $pBadge = $payBadges[$transaction['payment_status']] ?? 'bg-gray-100 text-gray-600';
                 ?>
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider <?= $pBadge ?>">
-                    <?= str_replace('_', ' ', $transaction['payment_status']) ?>
+                    <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$transaction['payment_status']] ?? str_replace('_', ' ', $transaction['payment_status'])) ?>
                 </span>
             </div>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Created on <?= date('d F Y, H:i', strtotime($transaction['created_at'])) ?> by cashier <span class="font-bold text-navy-700 dark:text-white"><?= esc($transaction['user_name'] ?? 'Admin') ?></span></p>
@@ -124,9 +124,9 @@
                     </div>
                     <?php
                         $cleanPhone = preg_replace('/[^0-9]/', '', $transaction['customer_phone']);
-                        $waPhone = str_starts_with($cleanPhone, '0') ? '62' . substr($cleanPhone, 1) : $cleanPhone;
+                        $waPhone = (strlen($cleanPhone) === 10 ? '91' . $cleanPhone : (strlen($cleanPhone) === 11 && str_starts_with($cleanPhone, '0') ? '91' . substr($cleanPhone, 1) : $cleanPhone));
                     ?>
-                    <a href="https://wa.me/<?= $waPhone ?>?text=Hello%20<?= urlencode($transaction['customer_name']) ?>,%20your%20Basant%20Dry%20Cleaners%20order%20(<?= $transaction['transaction_code'] ?>)%20status:%20<?= strtoupper($transaction['status']) ?>" target="_blank" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 flex items-center gap-1">
+                    <a href="https://wa.me/<?= $waPhone ?>?text=Hello%20<?= urlencode($transaction['customer_name']) ?>,%20your%20Basant%20Dry%20Cleaners%20order%20(<?= $transaction['transaction_code'] ?>)%20status:%20<?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$transaction['status']] ?? str_replace('_', ' ', $transaction['status'])) ?>" target="_blank" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 flex items-center gap-1">
                         <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
                         Send WhatsApp
                     </a>
@@ -166,7 +166,7 @@
                             <tr class="hover:bg-lightPrimary/50 dark:hover:bg-navy-700/40">
                                 <td class="px-6 py-4">
                                     <p class="font-bold text-navy-700 dark:text-white"><?= esc($item['service_name']) ?></p>
-                                    <span class="inline-block text-[10px] text-gray-400 uppercase"><?= esc($item['service_type']) ?></span>
+                                    <span class="inline-block text-[10px] text-gray-400 uppercase"><?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$item['service_type']] ?? str_replace('_', ' ', $item['service_type'])) ?></span>
                                 </td>
                                 <td class="px-6 py-4 font-mono font-bold">
                                     <?= (float)$item['qty'] ?> <?= esc($item['service_unit']) ?>
@@ -194,7 +194,7 @@
                             </div>
                             <div class="flex-1 text-xs">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-navy-700 dark:text-white capitalize"><?= str_replace('_', ' ', $h['status']) ?></span>
+                                    <span class="font-bold text-navy-700 dark:text-white capitalize"><?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$h['status']] ?? str_replace('_', ' ', $h['status'])) ?></span>
                                     <span class="text-[11px] text-gray-400"><?= date('d M Y, H:i', strtotime($h['created_at'])) ?></span>
                                 </div>
                                 <p class="text-gray-500 dark:text-gray-400 mt-0.5"><?= esc($h['notes'] ?? 'Status updated') ?> <span class="text-gray-400">oleh <?= esc($h['changed_by_name'] ?? 'Admin') ?></span></p>
@@ -243,10 +243,10 @@
                             <?php foreach ($transaction['payments'] as $p): ?>
                                 <div class="p-2.5 rounded-xl bg-lightPrimary dark:bg-navy-900 text-[11px] flex justify-between items-center">
                                     <div>
-                                        <p class="font-bold text-navy-700 dark:text-white">Rp <?= number_format($p['amount'], 0, ',', '.') ?> (<?= strtoupper($p['method']) ?>)</p>
+                                        <p class="font-bold text-navy-700 dark:text-white">Rp <?= number_format($p['amount'], 0, ',', '.') ?> (<?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$p['method']] ?? str_replace('_', ' ', $p['method'])) ?>)</p>
                                         <p class="text-[10px] text-gray-400"><?= date('d M Y H:i', strtotime($p['paid_at'])) ?></p>
                                     </div>
-                                    <span class="text-[10px] text-gray-400">kasir: <?= esc($p['received_by_name'] ?? 'Admin') ?></span>
+                                    <span class="text-[10px] text-gray-400">Cashier: <?= esc($p['received_by_name'] ?? 'Admin') ?></span>
                                 </div>
                             <?php endforeach; ?>
                         </div>

@@ -64,7 +64,7 @@
                                         $tBadge = $typeBadges[$s['type']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold capitalize <?= $tBadge ?>">
-                                        <?= esc($s['type']) ?>
+                                        <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$s['type']] ?? str_replace('_', ' ', $s['type'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 font-mono uppercase text-gray-500 dark:text-gray-400">

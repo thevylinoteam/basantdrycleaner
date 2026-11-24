@@ -82,7 +82,7 @@
                                         <span class="font-mono text-navy-700 dark:text-white font-semibold"><?= esc($c['phone']) ?></span>
                                         <?php
                                             $cleanPhone = preg_replace('/[^0-9]/', '', $c['phone']);
-                                            $waPhone = str_starts_with($cleanPhone, '0') ? '62' . substr($cleanPhone, 1) : $cleanPhone;
+                                            $waPhone = (strlen($cleanPhone) === 10 ? '91' . $cleanPhone : (strlen($cleanPhone) === 11 && str_starts_with($cleanPhone, '0') ? '91' . substr($cleanPhone, 1) : $cleanPhone));
                                         ?>
                                         <a href="https://wa.me/<?= $waPhone ?>" target="_blank" class="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 hover:bg-emerald-100 transition-colors" title="Send WhatsApp Message">
                                             <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>

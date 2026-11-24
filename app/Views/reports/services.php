@@ -81,7 +81,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold capitalize bg-lightPrimary dark:bg-navy-700 text-navy-700 dark:text-white">
-                                        <?= esc($row['service_type']) ?>
+                                        <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$row['service_type']] ?? str_replace('_', ' ', $row['service_type'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">

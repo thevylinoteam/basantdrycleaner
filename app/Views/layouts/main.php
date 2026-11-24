@@ -336,7 +336,7 @@
                 </div>
             </div>
 
-            <!-- Horizon Sidebar Promotion/Info Card -->
+            <!-- Basant Sidebar Promotion/Info Card -->
             <div class="px-5 py-4">
                 <div class="relative flex flex-col items-center rounded-[20px] bg-gradient-to-br from-brand-500 to-brand-600 p-4 text-center text-white shadow-lg shadow-brand-500/25">
                     <div class="absolute -top-6 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white bg-white dark:bg-navy-800 dark:border-navy-800 shadow-md overflow-hidden">
@@ -353,7 +353,7 @@
 
         <!-- Main Content Area -->
         <div class="xl:pl-[290px] flex flex-col flex-1 min-w-0 font-dm">
-            <!-- Floating Horizon UI Navbar -->
+            <!-- Floating Basant UI Navbar -->
             <header class="sticky top-3 z-40 mx-3 md:mx-6 mt-3">
                 <div class="flex flex-row flex-wrap items-center justify-between rounded-2xl bg-white/80 dark:bg-navy-800/80 p-2.5 backdrop-blur-xl shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
                     <!-- Left: Breadcrumb & Page Title -->
@@ -522,7 +522,7 @@
                 <?= $this->renderSection('content') ?>
             </main>
 
-            <!-- Horizon Footer -->
+            <!-- Basant Footer -->
             <footer class="mt-auto py-5 text-center text-xs text-gray-500 dark:text-gray-400 font-medium">
                 <p>&copy; <?= date('Y') ?> Basant Dry Cleaners. All Rights Reserved. Built with CodeIgniter 4.</p>
             </footer>

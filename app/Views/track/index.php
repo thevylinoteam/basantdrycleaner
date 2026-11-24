@@ -74,7 +74,7 @@
                                 $pBadge = $payBadges[$tx['payment_status']] ?? 'bg-gray-100 text-gray-600';
                             ?>
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider <?= $pBadge ?>">
-                                Bill: <?= str_replace('_', ' ', $tx['payment_status']) ?>
+                                Bill: <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$tx['payment_status']] ?? str_replace('_', ' ', $tx['payment_status'])) ?>
                             </span>
                         </div>
                     </div>
