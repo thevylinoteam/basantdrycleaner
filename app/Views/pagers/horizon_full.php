@@ -4,9 +4,9 @@ use CodeIgniter\Pager\PagerRenderer;
 /** @var PagerRenderer $pager */
 $pager->setSurroundCount(2);
 ?>
-<nav aria-label="Navigasi Halaman" class="flex items-center justify-between gap-2 px-6 py-4 border-t border-gray-100 dark:border-white/10 flex-wrap">
+<nav aria-label="Page Navigation" class="flex items-center justify-between gap-2 px-6 py-4 border-t border-gray-100 dark:border-white/10 flex-wrap">
     <div class="hidden sm:block text-xs text-gray-500 dark:text-gray-400">
-        Menampilkan halaman aktif navigasi data
+        Browse result pages
     </div>
 
     <ul class="inline-flex items-center gap-1.5 text-xs font-medium">

@@ -85,7 +85,7 @@
                     <?php if (empty($transactions)): ?>
                         <tr>
                             <td colspan="7" class="px-6 py-10 text-center text-gray-400 dark:text-gray-500">
-                                Tidak ada transaksi yang sesuai dengan kriteria filter.
+                                No orders match the selected filters.
                             </td>
                         </tr>
                     <?php else: ?>

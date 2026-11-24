@@ -57,7 +57,7 @@
                 </a>
                 <button type="submit" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center gap-1.5">
                     <i data-lucide="save" class="w-4 h-4"></i>
-                    Save Layanan
+                    Save Service
                 </button>
             </div>
         </form>

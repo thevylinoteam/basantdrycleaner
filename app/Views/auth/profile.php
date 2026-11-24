@@ -65,7 +65,7 @@
                 <div class="pt-4 flex justify-end border-t border-gray-100 dark:border-white/10">
                     <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all">
                         <i data-lucide="save" class="w-4 h-4"></i>
-                        Save Perubahan
+                        Save Changes
                     </button>
                 </div>
             </form>

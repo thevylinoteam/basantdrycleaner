@@ -207,9 +207,9 @@
                     };
                 ?>
 
-                <!-- Section: Utama -->
+                <!-- Section: Main -->
                 <div>
-                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Utama</p>
+                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Main</p>
                     <nav class="space-y-1">
                         <?php 
                             $isDashboard = ($seg1 == 'dashboard' || $seg1 == ''); 
@@ -227,9 +227,9 @@
                     </nav>
                 </div>
 
-                <!-- Section: Operasional -->
+                <!-- Section: Operations -->
                 <div>
-                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Operasional</p>
+                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Operations</p>
                     <nav class="space-y-1">
                         <?php 
                             $isCreateTx = ($seg1 == 'transactions' && $seg2 == 'create'); 
@@ -467,7 +467,7 @@
                             </button>
                             <div x-show="userOpen" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute right-0 mt-3 w-60 rounded-[20px] bg-white dark:bg-navy-800 p-4 shadow-3xl shadow-shadow-500 dark:shadow-none border border-gray-100 dark:border-white/10 z-50">
                                 <div class="pb-3 border-b border-gray-100 dark:border-white/10">
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">👋 Halo,</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">👋 Hello,</p>
                                     <p class="text-sm font-bold text-navy-700 dark:text-white truncate"><?= esc(session()->get('userName') ?? 'Administrator') ?></p>
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-50 text-brand-600 dark:bg-brand-900/60 dark:text-brand-300 mt-1">
                                         <?= esc(session()->get('userRole') ?? 'admin') ?>
@@ -476,7 +476,7 @@
                                 <div class="mt-3 flex flex-col space-y-2 text-xs">
                                     <a href="<?= base_url('profile') ?>" class="flex items-center gap-2 py-1.5 px-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-lightPrimary dark:hover:bg-navy-700 font-medium transition-colors">
                                         <i data-lucide="user" class="w-4 h-4 text-brand-500"></i>
-                                        Pengaturan Akun
+                                        Account Settings
                                     </a>
                                     <a href="<?= base_url('logout') ?>" class="flex items-center gap-2 py-1.5 px-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 font-semibold transition-colors">
                                         <i data-lucide="log-out" class="w-4 h-4"></i>

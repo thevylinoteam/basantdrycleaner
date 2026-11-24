@@ -40,7 +40,7 @@
                     <?php if (empty($services)): ?>
                         <tr>
                             <td colspan="8" class="px-6 py-10 text-center text-gray-400 dark:text-gray-500">
-                                Belum ada data layanan laundry.
+                                No laundry services available.
                             </td>
                         </tr>
                     <?php else: ?>
@@ -144,7 +144,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="svc_unit" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Per item *</label>
+                            <label for="svc_unit" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Unit of Measure *</label>
                             <select name="unit" id="svc_unit" required class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                                 <option value="kg">Kilogram (kg)</option>
                                 <option value="pcs">Pieces (pcs)</option>
@@ -169,7 +169,7 @@
                         </button>
                         <button type="submit" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center gap-1.5">
                             <i data-lucide="check" class="w-4 h-4"></i>
-                            Save Layanan
+                            Save Service
                         </button>
                     </div>
                 </form>

@@ -28,7 +28,7 @@
                     <?= basant_label($transaction['payment_status']) ?>
                 </span>
             </div>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Dibuat pada <?= date('d F Y, H:i', strtotime($transaction['created_at'])) ?> oleh kasir <span class="font-bold text-navy-700 dark:text-white"><?= esc($transaction['user_name'] ?? 'Admin') ?></span></p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Created on <?= date('d F Y, H:i', strtotime($transaction['created_at'])) ?> by cashier <span class="font-bold text-navy-700 dark:text-white"><?= esc($transaction['user_name'] ?? 'Admin') ?></span></p>
         </div>
 
         <div class="flex items-center gap-2">
@@ -39,16 +39,16 @@
             <?php if ($transaction['balance_due'] > 0): ?>
                 <button type="button" @click="payModalOpen = true" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold transition-all shadow-lg shadow-brand-500/25">
                     <i data-lucide="credit-card" class="w-3.5 h-3.5"></i>
-                    Bayar Tagihan
+                    Record Payment
                 </button>
             <?php endif; ?>
             <a href="<?= base_url('transactions/print/' . $transaction['id']) ?>" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white dark:bg-navy-800 hover:bg-lightPrimary dark:hover:bg-navy-700 text-navy-700 dark:text-white text-xs font-bold border border-gray-200 dark:border-navy-700 transition-colors shadow-sm">
                 <i data-lucide="printer" class="w-3.5 h-3.5 text-gray-400"></i>
                 Print Receipt
             </a>
-            <button type="button" onclick="confirmDelete('<?= base_url('transactions/delete/' . $transaction['id']) ?>', 'Hapus Transaksi', 'Apakah Anda yakin ingin menghapus transaksi ini? Data akan diarsipkan (soft delete).')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-300 text-xs font-bold transition-colors shadow-sm" title="Hapus Transaksi">
+            <button type="button" onclick="confirmDelete('<?= base_url('transactions/delete/' . $transaction['id']) ?>', 'Delete Order', 'Archive this order?')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-300 text-xs font-bold transition-colors shadow-sm" title="Delete Order">
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                Hapus
+                Delete
             </button>
         </div>
     </div>
@@ -106,7 +106,7 @@
         <?php if (!empty($transaction['picked_up_at'])): ?>
             <div class="mt-6 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs text-center font-semibold flex items-center justify-center gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
-                Cucian telah diserahkan dan diambil oleh pelanggan pada <?= date('d M Y, H:i', strtotime($transaction['picked_up_at'])) ?>
+                Order collected by the customer on <?= date('d M Y, H:i', strtotime($transaction['picked_up_at'])) ?>
             </div>
         <?php endif; ?>
     </div>
@@ -128,7 +128,7 @@
                     ?>
                     <a href="https://wa.me/<?= $waPhone ?>?text=<?= rawurlencode('Hello ' . $transaction['customer_name'] . ', your Basant Dry Cleaners order ' . $transaction['transaction_code'] . ' is currently: ' . basant_label($transaction['status'])) ?>" target="_blank" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 flex items-center gap-1">
                         <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
-                        Kirim WhatsApp
+                        Send WhatsApp Message
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-3 text-xs">
@@ -142,7 +142,7 @@
                     </div>
                     <div class="col-span-2">
                         <p class="text-gray-400">Address:</p>
-                        <p class="text-navy-700 dark:text-gray-300 mt-0.5"><?= esc($transaction['customer_address'] ?? 'Address tidak dicantumkan') ?></p>
+                        <p class="text-navy-700 dark:text-gray-300 mt-0.5"><?= esc($transaction['customer_address'] ?? 'Address not provided') ?></p>
                     </div>
                 </div>
             </div>
@@ -155,8 +155,8 @@
                 <table class="w-full text-left text-xs">
                     <thead>
                         <tr class="border-b border-gray-100 dark:border-white/10">
-                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Layanan</th>
-                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Jumlah</th>
+                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Service</th>
+                            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Quantity</th>
                             <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Unit Price</th>
                             <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Subtotal</th>
                         </tr>
@@ -197,7 +197,7 @@
                                     <span class="font-bold text-navy-700 dark:text-white capitalize"><?= basant_label($h['status']) ?></span>
                                     <span class="text-[11px] text-gray-400"><?= date('d M Y, H:i', strtotime($h['created_at'])) ?></span>
                                 </div>
-                                <p class="text-gray-500 dark:text-gray-400 mt-0.5"><?= esc($h['notes'] ?? 'Status diubah') ?> <span class="text-gray-400">oleh <?= esc($h['changed_by_name'] ?? 'Admin') ?></span></p>
+                                <p class="text-gray-500 dark:text-gray-400 mt-0.5"><?= esc($h['notes'] ?? 'Status updated') ?> <span class="text-gray-400">by <?= esc($h['changed_by_name'] ?? 'Admin') ?></span></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -231,7 +231,7 @@
                 <?php if ($transaction['balance_due'] > 0): ?>
                     <button type="button" @click="payModalOpen = true" class="w-full py-3 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-1.5">
                         <i data-lucide="plus" class="w-4 h-4"></i>
-                        Input Pembayaran
+                        Record Payment
                     </button>
                 <?php endif; ?>
 
@@ -246,7 +246,7 @@
                                         <p class="font-bold text-navy-700 dark:text-white">₹ <?= number_format($p['amount'], 2, '.', ',') ?> (<?= esc(basant_label($p['method'])) ?>)</p>
                                         <p class="text-[10px] text-gray-400"><?= date('d M Y H:i', strtotime($p['paid_at'])) ?></p>
                                     </div>
-                                    <span class="text-[10px] text-gray-400">kasir: <?= esc($p['received_by_name'] ?? 'Admin') ?></span>
+                                    <span class="text-[10px] text-gray-400">Cashier: <?= esc($p['received_by_name'] ?? 'Admin') ?></span>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -259,7 +259,7 @@
                 <div class="rounded-[20px] bg-amber-50/60 dark:bg-amber-950/30 p-5 border border-amber-200/60 dark:border-amber-800/40 text-xs">
                     <h3 class="font-bold text-amber-900 dark:text-amber-300 mb-1 flex items-center gap-1.5">
                         <i data-lucide="sticky-note" class="w-4 h-4 text-amber-500"></i>
-                        Catatan Transaksi
+                        Order Notes
                     </h3>
                     <p class="text-amber-800 dark:text-amber-200 leading-relaxed"><?= nl2br(esc($transaction['notes'])) ?></p>
                 </div>
@@ -297,7 +297,7 @@
                     <div x-show="selectedStatus === 'selesai' && balanceDue > 0" class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs">
                         <p class="font-bold flex items-center gap-1.5">
                             <i data-lucide="alert-triangle" class="w-4 h-4"></i>
-                            Peringatan Bisnis (FR-26)
+                            Payment Required
                         </p>
                         <p class="mt-1">This order <strong>cannot be marked completed or collected</strong> because the outstanding balance is <strong class="font-mono">₹ <?= number_format($transaction['balance_due'], 2, '.', ',') ?></strong>. Record payment first.</p>
                     </div>
@@ -309,11 +309,11 @@
 
                     <div class="pt-3 flex justify-end gap-2">
                         <button type="button" @click="statusModalOpen = false" class="px-4 py-2.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-600 dark:text-gray-300 text-xs font-bold transition-colors">
-                            Batal
+                            Cancel
                         </button>
                         <button type="submit" :disabled="selectedStatus === 'selesai' && balanceDue > 0" class="px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 disabled:opacity-40 disabled:hover:bg-brand-500 text-white text-xs font-bold shadow-lg shadow-brand-500/25 transition-all flex items-center gap-1.5">
                             <i data-lucide="check" class="w-4 h-4"></i>
-                            Simpan Perubahan
+                            Save Changes
                         </button>
                     </div>
                 </form>
@@ -348,18 +348,18 @@
                     <div>
                         <label for="method" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Payment Method *</label>
                         <select name="method" id="method" required class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                            <option value="tunai">Tunai / Cash</option>
+                            <option value="tunai">Cash</option>
                             <option value="transfer">Bank Transfer / UPI</option>
                         </select>
                     </div>
 
                     <div class="pt-3 flex justify-end gap-2">
                         <button type="button" @click="payModalOpen = false" class="px-4 py-2.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-600 dark:text-gray-300 text-xs font-bold transition-colors">
-                            Batal
+                            Cancel
                         </button>
                         <button type="submit" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-lg shadow-brand-500/25 transition-all flex items-center gap-1.5">
                             <i data-lucide="check" class="w-4 h-4"></i>
-                            Simpan Pembayaran
+                            Save Payment
                         </button>
                     </div>
                 </form>

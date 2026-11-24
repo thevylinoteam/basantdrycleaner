@@ -18,7 +18,7 @@
         <div>
             <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-navy-800 hover:bg-lightPrimary dark:hover:bg-navy-700 text-navy-700 dark:text-white text-xs font-bold rounded-xl border border-gray-200 dark:border-navy-700 shadow-sm transition-colors">
                 <i data-lucide="printer" class="w-4 h-4 text-brand-500"></i>
-                Cetak Laporan
+                Print Report
             </button>
         </div>
     </div>
@@ -39,7 +39,7 @@
             <div class="flex items-center gap-2 w-full sm:w-auto">
                 <button type="submit" class="w-full sm:w-auto px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-1.5">
                     <i data-lucide="filter" class="w-3.5 h-3.5"></i>
-                    Terapkan Filter
+                    Apply Filter
                 </button>
                 <?php if (!empty($start_date) || !empty($end_date)): ?>
                     <a href="<?= base_url('reports/revenue') ?>" class="px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-500 dark:text-gray-300 text-xs font-bold rounded-xl transition-colors">
@@ -57,7 +57,7 @@
                 <p class="text-xs font-medium text-brand-100">Total Revenue:</p>
                 <h4 class="text-2xl sm:text-3xl font-bold font-poppins mt-1">₹ <?= number_format($total_revenue ?? 0, 2, '.', ',') ?></h4>
                 <p class="text-[11px] text-brand-100 mt-2 font-medium">
-                    <?= (!empty($start_date) || !empty($end_date)) ? "Period: " . ($start_date ?: 'Awal') . " s/d " . ($end_date ?: 'Sekarang') : "All Dates" ?>
+                    <?= (!empty($start_date) || !empty($end_date)) ? "Period: " . ($start_date ?: 'Start') . " to " . ($end_date ?: 'Now') : "All Dates" ?>
                 </p>
             </div>
             <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white flex-shrink-0">
@@ -95,7 +95,7 @@
                     <?php if (empty($report)): ?>
                         <tr>
                             <td colspan="3" class="px-6 py-10 text-center text-gray-400 dark:text-gray-500">
-                                Tidak ada data pendapatan pada rentang tanggal ini.
+                                No revenue recorded for this date range.
                             </td>
                         </tr>
                     <?php else: ?>
@@ -106,7 +106,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lightPrimary dark:bg-navy-700 text-navy-700 dark:text-white font-semibold">
-                                        <?= (int)$row['payment_count'] ?> kali bayar
+                                        <?= (int)$row['payment_count'] ?> payments
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 font-poppins font-bold text-emerald-500 text-right text-sm">

@@ -58,7 +58,7 @@
         </div>
         <a href="<?= base_url('transactions') ?>" class="text-xs font-bold text-brand-500 hover:text-brand-600 flex items-center gap-1">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            Back ke Daftar
+            Back to Orders
         </a>
     </div>
 
@@ -77,7 +77,7 @@
                 </div>
                 <a href="<?= base_url('customers/create') ?>" target="_blank" class="text-xs text-brand-500 hover:text-brand-600 font-bold flex items-center gap-1">
                     <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-                    + Customer Baru
+                    + New Customer
                 </a>
             </div>
 
@@ -107,7 +107,7 @@
                 </div>
                 <button type="button" @click="addItem()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-brand-50 dark:hover:bg-navy-600 text-brand-500 dark:text-brand-300 text-xs font-bold transition-colors">
                     <i data-lucide="plus" class="w-4 h-4"></i>
-                    Add Baris Item
+                    Add Item
                 </button>
             </div>
 
@@ -116,7 +116,7 @@
                     <div class="p-4 rounded-xl bg-lightPrimary dark:bg-navy-900 border border-gray-100 dark:border-navy-700 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                         <!-- Service Select -->
                         <div class="flex-1">
-                            <label class="block text-xs font-bold text-navy-700 dark:text-gray-300 mb-1.5" x-text="'Layanan #' + (index + 1)"></label>
+                            <label class="block text-xs font-bold text-navy-700 dark:text-gray-300 mb-1.5" x-text="'Service #' + (index + 1)"></label>
                             <select :name="'items[' + index + '][service_id]'" x-model="item.service_id" @change="onServiceChange(index)" required class="w-full px-3.5 py-2.5 bg-white dark:bg-navy-800 border border-gray-200 dark:border-navy-700 rounded-xl text-xs font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                                 <option value="">-- Select a Service --</option>
                                 <template x-for="svc in servicesList" :key="svc.id">
@@ -127,7 +127,7 @@
 
                         <!-- Qty -->
                         <div class="w-full sm:w-28">
-                            <label class="block text-xs font-bold text-navy-700 dark:text-gray-300 mb-1.5" x-text="'Jumlah (' + item.unit + ')'"></label>
+                            <label class="block text-xs font-bold text-navy-700 dark:text-gray-300 mb-1.5" x-text="'Quantity (' + item.unit + ')'"></label>
                             <input type="number" :name="'items[' + index + '][qty]'" x-model="item.qty" @input="calculateSubtotal(index)" required min="0.1" step="0.1" class="w-full px-3.5 py-2.5 bg-white dark:bg-navy-800 border border-gray-200 dark:border-navy-700 rounded-xl text-xs font-mono font-bold text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                         </div>
 
@@ -154,7 +154,7 @@
                     <span class="text-xl sm:text-2xl font-bold font-poppins" x-text="formatRupiah(getTotalPrice())"></span>
                 </div>
                 <div class="text-right text-xs text-brand-100 font-medium">
-                    <span x-text="items.length + ' Paket Layanan Dipilih'"></span>
+                    <span x-text="items.length + ' Services Selected'"></span>
                 </div>
             </div>
         </div>
@@ -173,7 +173,7 @@
                     <div class="flex items-center justify-between mb-1.5">
                         <label for="payment_amount" class="block text-xs font-bold text-navy-700 dark:text-white">Amount Paid Now (₹)</label>
                         <button type="button" @click="setFullPayment()" class="text-xs font-bold text-brand-500 hover:underline">
-                            Bayar Paid
+                            Pay in Full
                         </button>
                     </div>
                     <input type="number" name="payment_amount" id="payment_amount" x-model="paymentAmount" min="0" step="0.01" placeholder="0" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-mono text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
@@ -183,7 +183,7 @@
                 <div>
                     <label for="payment_method" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Payment Method</label>
                     <select name="payment_method" id="payment_method" x-model="paymentMethod" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                        <option value="tunai">Cash / Cash</option>
+                        <option value="tunai">Cash</option>
                         <option value="transfer">Bank Transfer / UPI</option>
                     </select>
                 </div>
@@ -201,7 +201,7 @@
                 </a>
                 <button type="submit" class="px-6 py-2.5 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center gap-2">
                     <i data-lucide="check-circle" class="w-4 h-4"></i>
-                    Save Order & Terbitkan Nota
+                    Save Order & Issue Receipt
                 </button>
             </div>
         </div>

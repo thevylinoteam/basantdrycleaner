@@ -14,7 +14,7 @@
         <div class="flex items-center gap-2.5">
             <a href="<?= base_url('transactions/create') ?>" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all">
                 <i data-lucide="plus" class="w-4 h-4"></i>
-                Transaksi Baru
+                New Order
             </a>
             <a href="<?= base_url('customers') ?>" class="inline-flex items-center gap-2 px-3.5 py-2.5 bg-white dark:bg-navy-800 hover:bg-lightPrimary dark:hover:bg-navy-700 text-navy-700 dark:text-white text-xs font-bold rounded-xl border border-gray-200 dark:border-navy-700 shadow-sm transition-colors">
                 <i data-lucide="users" class="w-4 h-4 text-brand-500"></i>
@@ -36,7 +36,7 @@
                     <?= number_format($stats['today_transactions_count'] ?? 0) ?>
                 </h4>
                 <a href="<?= base_url('transactions?start_date=' . date('Y-m-d')) ?>" class="text-[11px] font-semibold text-brand-500 hover:text-brand-600 mt-1 inline-flex items-center gap-1">
-                    Detail pesanan &rarr;
+                    Order Details &rarr;
                 </a>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     ₹ <?= number_format($stats['today_revenue'] ?? 0, 2, '.', ',') ?>
                 </h4>
                 <a href="<?= base_url('reports/revenue') ?>" class="text-[11px] font-semibold text-emerald-500 hover:text-emerald-600 mt-1 inline-flex items-center gap-1">
-                    Laporan keuangan &rarr;
+                    Financial Report &rarr;
                 </a>
             </div>
         </div>
@@ -68,7 +68,7 @@
                     <?= number_format($stats['ready_for_pickup_count'] ?? 0) ?>
                 </h4>
                 <a href="<?= base_url('transactions?status=siap_diambil') ?>" class="text-[11px] font-semibold text-amber-500 hover:text-amber-600 mt-1 inline-flex items-center gap-1">
-                    Menunggu ambil &rarr;
+                    Awaiting Collection &rarr;
                 </a>
             </div>
         </div>
@@ -82,7 +82,7 @@
                 <p class="font-dm text-xs font-medium text-brand-100">Public Portal</p>
                 <h4 class="text-base sm:text-lg font-bold text-white font-poppins mt-0.5">Track Order Without Signing In</h4>
                 <a href="<?= base_url('track') ?>" target="_blank" class="text-[11px] font-semibold text-brand-200 hover:text-white mt-1 inline-flex items-center gap-1">
-                    Buka Pelacak &nearr;
+                    Open Order Tracking &nearr;
                 </a>
             </div>
         </div>
@@ -96,7 +96,7 @@
                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Five most recent orders</p>
             </div>
             <a href="<?= base_url('transactions') ?>" class="text-xs font-bold text-brand-500 hover:text-brand-600 inline-flex items-center gap-1">
-                Lihat Semua &rarr;
+                View All &rarr;
             </a>
         </div>
 
@@ -117,7 +117,7 @@
                     <?php if (empty($stats['recent_transactions'])): ?>
                         <tr>
                             <td colspan="7" class="px-6 py-10 text-center text-gray-400 dark:text-gray-500">
-                                Belum ada transaksi yang tercatat.
+                                No orders recorded yet.
                             </td>
                         </tr>
                     <?php else: ?>
