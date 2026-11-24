@@ -113,7 +113,7 @@ class TransactionController extends BaseController
         if (!$customer) {
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Pelanggan tidak ditemukan.',
+                'message' => 'Customer not found.',
             ])->setStatusCode(404);
         }
 
@@ -125,7 +125,7 @@ class TransactionController extends BaseController
         if (empty($rawItems) || !is_array($rawItems)) {
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Daftar item layanan tidak boleh kosong.',
+                'message' => 'Add at least one service item.',
             ])->setStatusCode(400);
         }
 
@@ -141,7 +141,7 @@ class TransactionController extends BaseController
             if ($serviceId <= 0 || $qty <= 0) {
                 return $this->response->setJSON([
                     'status'  => 'error',
-                    'message' => 'Setiap item wajib memiliki service_id dan qty > 0.',
+                    'message' => 'Each item requires a service ID and a quantity greater than zero.',
                 ])->setStatusCode(400);
             }
 
@@ -149,7 +149,7 @@ class TransactionController extends BaseController
             if (!$service || !$service['is_active']) {
                 return $this->response->setJSON([
                     'status'  => 'error',
-                    'message' => "Layanan dengan ID {$serviceId} tidak aktif atau tidak ditemukan.",
+                    'message' => "Service ID {$serviceId} is inactive or not found.",
                 ])->setStatusCode(400);
             }
 
@@ -202,7 +202,7 @@ class TransactionController extends BaseController
                 'transaction_id' => $transactionId,
                 'status'         => TransactionModel::STATUS_DITERIMA,
                 'changed_by'     => $userId,
-                'notes'          => 'Pesanan cucian baru diterima sistem.',
+                'notes'          => 'New laundry order received.',
                 'created_at'     => date('Y-m-d H:i:s'),
             ]);
 
@@ -228,22 +228,22 @@ class TransactionController extends BaseController
             $createdTransaction = $this->transactionModel->getTransactionWithDetails($transactionId);
 
             if (!$this->wantsJson()) {
-                return redirect()->to('/transactions/detail/' . $transactionId)->with('success', 'Transaksi berhasil dibuat.');
+                return redirect()->to('/transactions/detail/' . $transactionId)->with('success', 'Order created successfully.');
             }
 
             return $this->response->setJSON([
                 'status'  => 'success',
-                'message' => 'Transaksi berhasil dibuat.',
+                'message' => 'Order created successfully.',
                 'data'    => $createdTransaction,
             ])->setStatusCode(201);
         } catch (\Throwable $e) {
             $db->transRollback();
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Gagal membuat transaksi: ' . $e->getMessage());
+                return redirect()->back()->withInput()->with('error', 'Unable to create order: ' . $e->getMessage());
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Gagal membuat transaksi: ' . $e->getMessage(),
+                'message' => 'Unable to create order: ' . $e->getMessage(),
             ])->setStatusCode(500);
         }
     }
@@ -256,11 +256,11 @@ class TransactionController extends BaseController
         $transaction = $this->transactionModel->getTransactionWithDetails($id);
         if (!$transaction) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/transactions')->with('error', 'Transaksi tidak ditemukan.');
+                return redirect()->to('/transactions')->with('error', 'Order not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Transaksi tidak ditemukan.',
+                'message' => 'Order not found.',
             ])->setStatusCode(404);
         }
 
@@ -284,11 +284,11 @@ class TransactionController extends BaseController
         $transaction = $this->transactionModel->find($id);
         if (!$transaction) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/transactions')->with('error', 'Transaksi tidak ditemukan.');
+                return redirect()->to('/transactions')->with('error', 'Order not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Transaksi tidak ditemukan.',
+                'message' => 'Order not found.',
             ])->setStatusCode(404);
         }
 
@@ -299,7 +299,7 @@ class TransactionController extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->with('error', 'Format status tidak valid.');
+                return redirect()->back()->with('error', 'Invalid status.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -313,11 +313,11 @@ class TransactionController extends BaseController
         // Validate status transition sequence
         if (!$this->transactionModel->isValidStatusTransition($transaction['status'], $newStatus)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->with('error', "Transisi status tidak valid dari '{$transaction['status']}' ke '{$newStatus}'.");
+                return redirect()->back()->with('error', "Invalid status transition from '{$transaction['status']}' to '{$newStatus}'.");
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => "Transisi status tidak valid dari '{$transaction['status']}' ke '{$newStatus}'.",
+                'message' => "Invalid status transition from '{$transaction['status']}' to '{$newStatus}'.",
             ])->setStatusCode(400);
         }
 
@@ -326,11 +326,11 @@ class TransactionController extends BaseController
             $paymentTotal = $this->paymentModel->getTotalPaid($id);
             if ($paymentTotal < (float) $transaction['total_price']) {
                 if (!$this->wantsJson()) {
-                    return redirect()->back()->with('error', 'Cucian belum dapat diselesaikan/diambil karena pembayaran belum lunas.');
+                    return redirect()->back()->with('error', 'The order cannot be completed or collected until fully paid.');
                 }
                 return $this->response->setJSON([
                     'status'  => 'error',
-                    'message' => 'Cucian belum dapat ditandai selesai/diambil karena pembayaran belum lunas.',
+                    'message' => 'The order cannot be marked completed or collected until fully paid.',
                     'data'    => [
                         'total_price' => (float) $transaction['total_price'],
                         'total_paid'  => $paymentTotal,
@@ -362,12 +362,12 @@ class TransactionController extends BaseController
         $updatedTransaction = $this->transactionModel->getTransactionWithDetails($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/transactions/detail/' . $id)->with('success', "Status cucian berhasil diubah menjadi '{$newStatus}'.");
+            return redirect()->to('/transactions/detail/' . $id)->with('success', "Order status updated successfully.");
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => "Status transaksi berhasil diperbarui menjadi '{$newStatus}'.",
+            'message' => "Order status updated successfully.",
             'data'    => $updatedTransaction,
         ]);
     }
@@ -382,11 +382,11 @@ class TransactionController extends BaseController
         $transaction = $this->transactionModel->find($id);
         if (!$transaction) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/transactions')->with('error', 'Transaksi tidak ditemukan.');
+                return redirect()->to('/transactions')->with('error', 'Order not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Transaksi tidak ditemukan.',
+                'message' => 'Order not found.',
             ])->setStatusCode(404);
         }
 
@@ -397,7 +397,7 @@ class TransactionController extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->with('error', 'Jumlah bayar harus lebih besar dari 0.');
+                return redirect()->back()->with('error', 'Payment amount must be greater than zero.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -420,12 +420,12 @@ class TransactionController extends BaseController
         $updatedTransaction = $this->transactionModel->getTransactionWithDetails($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/transactions/detail/' . $id)->with('success', 'Pembayaran sebesar Rp ' . number_format($amount, 0, ',', '.') . ' berhasil dicatat.');
+            return redirect()->to('/transactions/detail/' . $id)->with('success', 'Payment of Rp ' . number_format($amount, 0, ',', '.') . ' recorded successfully.');
         }
 
         return $this->response->setJSON([
             'status'         => 'success',
-            'message'        => 'Pembayaran berhasil dicatat.',
+            'message'        => 'Payment recorded successfully.',
             'payment_status' => $newPaymentStatus,
             'data'           => $updatedTransaction,
         ]);
@@ -439,23 +439,23 @@ class TransactionController extends BaseController
         $transaction = $this->transactionModel->find($id);
         if (!$transaction) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/transactions')->with('error', 'Transaksi tidak ditemukan.');
+                return redirect()->to('/transactions')->with('error', 'Order not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Transaksi tidak ditemukan.',
+                'message' => 'Order not found.',
             ])->setStatusCode(404);
         }
 
         $this->transactionModel->delete($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/transactions')->with('success', 'Transaksi berhasil dihapus (soft delete).');
+            return redirect()->to('/transactions')->with('success', 'Order archived successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Transaksi berhasil dihapus (soft delete).',
+            'message' => 'Order archived successfully.',
         ]);
     }
 
@@ -468,15 +468,15 @@ class TransactionController extends BaseController
         if (!$transaction) {
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Transaksi tidak ditemukan.',
+                'message' => 'Order not found.',
             ])->setStatusCode(404);
         }
 
         $receiptPayload = [
             'store' => [
-                'name'    => 'Sistem Informasi Pengelolaan Laundry',
-                'address' => 'Jl. Kebersihan Bersama No. 100, Surabaya',
-                'phone'   => '0812-3456-7890',
+                'name'    => 'Basant Dry Cleaners',
+                'address' => 'Beside Darab Car, Khermai Road, Railway Colony, Satna, Madhya Pradesh',
+                'phone'   => '+91 8871280521',
             ],
             'receipt_number'    => $transaction['transaction_code'],
             'printed_at'        => date('Y-m-d H:i:s'),
@@ -502,7 +502,7 @@ class TransactionController extends BaseController
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Data cetak nota siap.',
+            'message' => 'Receipt is ready to print.',
             'data'    => $receiptPayload,
         ]);
     }

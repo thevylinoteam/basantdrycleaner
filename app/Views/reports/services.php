@@ -11,13 +11,13 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Laporan Performa Layanan</h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Statistik volume penggunaan dan kontribusi omzet per jenis paket cucian</p>
+            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Service Performance Report</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Service volume and revenue by package type</p>
         </div>
         <div>
             <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-navy-800 hover:bg-lightPrimary dark:hover:bg-navy-700 text-navy-700 dark:text-white text-xs font-bold rounded-xl border border-gray-200 dark:border-navy-700 shadow-sm transition-colors">
                 <i data-lucide="printer" class="w-4 h-4 text-brand-500"></i>
-                Cetak Laporan
+                Print Report
             </button>
         </div>
     </div>
@@ -27,18 +27,18 @@
         <form action="<?= base_url('reports/services') ?>" method="GET" class="flex flex-col sm:flex-row items-end gap-3">
             <div class="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                    <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Tanggal Mulai</label>
+                    <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Start Date</label>
                     <input type="date" name="start_date" value="<?= esc($start_date ?? '') ?>" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Tanggal Selesai</label>
+                    <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">End Date</label>
                     <input type="date" name="end_date" value="<?= esc($end_date ?? '') ?>" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                 </div>
             </div>
             <div class="flex items-center gap-2 w-full sm:w-auto">
                 <button type="submit" class="w-full sm:w-auto px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-1.5">
                     <i data-lucide="filter" class="w-3.5 h-3.5"></i>
-                    Terapkan Filter
+                    Apply Filter
                 </button>
                 <?php if (!empty($start_date) || !empty($end_date)): ?>
                     <a href="<?= base_url('reports/services') ?>" class="px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-500 dark:text-gray-300 text-xs font-bold rounded-xl transition-colors">
@@ -52,25 +52,25 @@
     <!-- Table of Services Breakdown -->
     <div class="rounded-[20px] bg-white dark:bg-navy-800 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5 overflow-hidden">
         <div class="px-6 py-5 border-b border-gray-100 dark:border-white/10 flex items-center justify-between">
-            <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Performa Paket Layanan Laundry</h3>
-            <span class="text-xs font-bold text-navy-700 dark:text-white">Total Akumulasi: <strong class="text-brand-500 font-poppins font-bold">Rp <?= number_format($total_revenue ?? 0, 0, ',', '.') ?></strong></span>
+            <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Laundry Service Performance</h3>
+            <span class="text-xs font-bold text-navy-700 dark:text-white">Grand Total: <strong class="text-brand-500 font-poppins font-bold">Rp <?= number_format($total_revenue ?? 0, 0, ',', '.') ?></strong></span>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-xs">
                 <thead>
                     <tr class="border-b border-gray-100 dark:border-white/10">
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Nama Layanan</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Tipe Paket</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Jumlah Order</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Service Name</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Package Type</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Order Count</th>
                         <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Total Volume</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Kontribusi Omzet</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Revenue Contribution</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-white/5 text-navy-700 dark:text-white font-medium">
                     <?php if (empty($report)): ?>
                         <tr>
                             <td colspan="5" class="px-6 py-10 text-center text-gray-400 dark:text-gray-500">
-                                Belum ada data transaksi layanan pada periode ini.
+                                No service orders for this period.
                             </td>
                         </tr>
                     <?php else: ?>
@@ -81,7 +81,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold capitalize bg-lightPrimary dark:bg-navy-700 text-navy-700 dark:text-white">
-                                        <?= esc($row['service_type']) ?>
+                                        <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$row['service_type']] ?? str_replace('_', ' ', $row['service_type'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">

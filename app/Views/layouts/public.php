@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? 'Cek Status Cucian - Horizon Laundry') ?></title>
+    <title><?= esc($title ?? 'Track Order - Basant Dry Cleaners') ?></title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?= base_url('logo-laundry.png') ?>">
+    <link rel="icon" type="image/webp" href="<?= base_url('basant-brand.webp') ?>">
     
     <!-- Google Fonts: DM Sans & Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,19 +36,19 @@
                     },
                     colors: {
                         lightPrimary: '#F4F7FE',
-                        blueSecondary: '#4318FF',
-                        brandLinear: '#868CFF',
+                        blueSecondary: '#1CB6FC',
+                        brandLinear: '#89B92E',
                         brand: {
-                            50: '#E9E3FF',
-                            100: '#C0B8FE',
-                            200: '#A195FD',
-                            300: '#8171FC',
-                            400: '#7551FF',
-                            500: '#422AFB',
-                            600: '#3311DB',
-                            700: '#2111A5',
-                            800: '#190793',
-                            900: '#11047A',
+                            50: '#E8F7FE',
+                            100: '#C1EAFE',
+                            200: '#9BDDFE',
+                            300: '#70CFFC',
+                            400: '#36B7F3',
+                            500: '#087CB7',
+                            600: '#08699D',
+                            700: '#15527F',
+                            800: '#183862',
+                            900: '#102747',
                         },
                         navy: {
                             50: '#d0dcfb',
@@ -115,10 +115,10 @@
     <header class="sticky top-3 z-30 mx-4 sm:mx-6 lg:mx-auto max-w-5xl w-full mt-3">
         <div class="px-5 py-3 rounded-2xl bg-white/80 dark:bg-navy-800/80 backdrop-blur-xl shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo Horizon Laundry" class="w-10 h-10 object-cover rounded-full drop-shadow-md">
+                <img src="<?= base_url('basant-brand.webp') ?>" alt="Basant Dry Cleaners" class="w-24 h-14 object-contain bg-white rounded-lg p-1">
                 <div>
-                    <h1 class="font-poppins font-bold text-base text-navy-700 dark:text-white leading-none">Horizon <span class="text-brand-500 font-normal">Laundry</span></h1>
-                    <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">Pelacakan Status Cucian Real-Time</p>
+                    <h1 class="font-poppins font-bold text-base text-navy-700 dark:text-white leading-none">Basant <span class="text-brand-500 font-normal">Dry Cleaners</span></h1>
+                    <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">Real-Time Order Tracking</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -145,7 +145,7 @@
 
     <!-- Footer -->
     <footer class="mt-auto py-6 text-center text-xs text-gray-500 dark:text-gray-400 font-medium">
-        <p>&copy; <?= date('Y') ?> Horizon Laundry UI. All Rights Reserved.</p>
+        <p>&copy; <?= date('Y') ?> Basant Dry Cleaners. All Rights Reserved.</p>
     </footer>
 
     <script>

@@ -4,12 +4,12 @@
 <div class="max-w-xl mx-auto space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Tambah Paket Layanan</h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Konfigurasi tarif dan estimasi durasi pengerjaan</p>
+            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Add Service Package</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Configure pricing and estimated turnaround</p>
         </div>
         <a href="<?= base_url('services') ?>" class="text-xs font-bold text-brand-500 hover:text-brand-600 flex items-center gap-1">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            Kembali
+            Back
         </a>
     </div>
 
@@ -18,21 +18,21 @@
             <?= csrf_field() ?>
 
             <div>
-                <label for="name" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Nama Layanan *</label>
-                <input type="text" name="name" id="name" required placeholder="Contoh: Cuci Kiloan Reguler (2 Hari)" value="<?= old('name') ?>" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
+                <label for="name" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Service Name *</label>
+                <input type="text" name="name" id="name" required placeholder="e.g. Regular Laundry (2 Days)" value="<?= old('name') ?>" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="type" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Tipe Paket *</label>
+                    <label for="type" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Package Type *</label>
                     <select name="type" id="type" required class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                        <option value="kiloan">Kiloan</option>
-                        <option value="satuan">Satuan</option>
-                        <option value="ekspres">Ekspres</option>
+                        <option value="kiloan">By Weight</option>
+                        <option value="satuan">Per Item</option>
+                        <option value="ekspres">Express</option>
                     </select>
                 </div>
                 <div>
-                    <label for="unit" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Satuan Ukur *</label>
+                    <label for="unit" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Unit of Measure *</label>
                     <select name="unit" id="unit" required class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                         <option value="kg">Kilogram (kg)</option>
                         <option value="pcs">Pieces (pcs)</option>
@@ -42,22 +42,22 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="price" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Tarif Harga (Rp) *</label>
+                    <label for="price" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Price (Rp) *</label>
                     <input type="number" name="price" id="price" required min="0" step="500" placeholder="7000" value="<?= old('price') ?>" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-bold text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                 </div>
                 <div>
-                    <label for="duration_estimate_hours" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Estimasi Pengerjaan (Jam) *</label>
+                    <label for="duration_estimate_hours" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Estimated Turnaround (Hours) *</label>
                     <input type="number" name="duration_estimate_hours" id="duration_estimate_hours" required min="1" placeholder="24" value="<?= old('duration_estimate_hours', 24) ?>" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                 </div>
             </div>
 
             <div class="pt-3 flex justify-end gap-2 border-t border-gray-100 dark:border-white/10">
                 <a href="<?= base_url('services') ?>" class="px-4 py-2.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-600 dark:text-gray-300 text-xs font-bold transition-colors">
-                    Batal
+                    Cancel
                 </a>
                 <button type="submit" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center gap-1.5">
                     <i data-lucide="save" class="w-4 h-4"></i>
-                    Simpan Layanan
+                    Save Service
                 </button>
             </div>
         </form>

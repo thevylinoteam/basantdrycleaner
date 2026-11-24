@@ -30,7 +30,7 @@ class Auth extends BaseController
 
         return $this->response->setJSON([
             'status'  => 'info',
-            'message' => 'Silakan masukkan email dan password untuk login.',
+            'message' => 'Enter your email and password to sign in.',
         ]);
     }
 
@@ -46,7 +46,7 @@ class Auth extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Silakan masukkan email yang valid dan password.');
+                return redirect()->back()->withInput()->with('error', 'Enter a valid email and password.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -61,15 +61,16 @@ class Auth extends BaseController
 
         if (!$user) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Email atau password salah.');
+                return redirect()->back()->withInput()->with('error', 'Incorrect email or password.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Email atau password salah.',
+                'message' => 'Incorrect email or password.',
             ])->setStatusCode(401);
         }
 
         // Set session
+        session()->regenerate(true);
         session()->set([
             'userId'     => $user['id'],
             'userName'   => $user['name'],
@@ -79,12 +80,12 @@ class Auth extends BaseController
         ]);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/dashboard')->with('success', 'Selamat datang kembali, ' . $user['name']);
+            return redirect()->to('/dashboard')->with('success', 'Welcome back, ' . $user['name']);
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Login berhasil.',
+            'message' => 'Signed in successfully.',
             'data'    => [
                 'id'    => $user['id'],
                 'name'  => $user['name'],
@@ -102,12 +103,12 @@ class Auth extends BaseController
         session()->destroy();
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/login')->with('success', 'Anda telah berhasil logout.');
+            return redirect()->to('/login')->with('success', 'You have signed out.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Logout berhasil. Sesi telah diakhiri.',
+            'message' => 'Signed out. Your session has ended.',
         ]);
     }
 
@@ -125,7 +126,7 @@ class Auth extends BaseController
         if (!$user) {
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'User tidak ditemukan.',
+                'message' => 'User not found.',
             ])->setStatusCode(404);
         }
 
@@ -159,7 +160,7 @@ class Auth extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->with('error', 'Konfirmasi kata sandi tidak cocok atau kurang dari 6 karakter.');
+                return redirect()->back()->with('error', 'Passwords do not match or contain fewer than 6 characters.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -173,11 +174,11 @@ class Auth extends BaseController
         $user = $this->userModel->find($userId);
         if (!password_verify($currentPassword, $user['password'])) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->with('error', 'Kata sandi saat ini salah.');
+                return redirect()->back()->with('error', 'Current password is incorrect.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Password saat ini salah.',
+                'message' => 'Current password is incorrect.',
             ])->setStatusCode(400);
         }
 
@@ -186,12 +187,12 @@ class Auth extends BaseController
         ]);
 
         if (!$this->wantsJson()) {
-            return redirect()->back()->with('success', 'Kata sandi Anda berhasil diperbarui.');
+            return redirect()->back()->with('success', 'Your password has been updated.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Password berhasil diperbarui.',
+            'message' => 'Password updated successfully.',
         ]);
     }
 }

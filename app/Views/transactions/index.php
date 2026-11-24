@@ -10,13 +10,13 @@
     <!-- Page Header & Action -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Daftar Transaksi Laundry</h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Kelola data pemesanan cucian, status pengerjaan, dan pelunasan tagihan</p>
+            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Laundry Orders</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Manage orders, processing status and payments</p>
         </div>
         <div>
             <a href="<?= base_url('transactions/create') ?>" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all">
                 <i data-lucide="plus-circle" class="w-4 h-4"></i>
-                Buat Transaksi Baru
+                Create New Order
             </a>
         </div>
     </div>
@@ -25,32 +25,32 @@
     <div class="rounded-[20px] bg-white dark:bg-navy-800 p-5 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
         <form action="<?= base_url('transactions') ?>" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div>
-                <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Cari (Resi / Pelanggan / HP)</label>
+                <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Search (Receipt / Customer / Mobile)</label>
                 <div class="relative">
-                    <input type="text" name="search" value="<?= esc($filters['search'] ?? '') ?>" placeholder="Ketik pencarian..." class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-brand-500">
+                    <input type="text" name="search" value="<?= esc($filters['search'] ?? '') ?>" placeholder="Enter search..." class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-brand-500">
                 </div>
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Status Pengerjaan</label>
+                <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Order Status</label>
                 <select name="status" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                    <option value="">Semua Status</option>
-                    <option value="diterima" <?= ($filters['status'] ?? '') == 'diterima' ? 'selected' : '' ?>>Diterima</option>
-                    <option value="dicuci" <?= ($filters['status'] ?? '') == 'dicuci' ? 'selected' : '' ?>>Dicuci</option>
-                    <option value="dikeringkan" <?= ($filters['status'] ?? '') == 'dikeringkan' ? 'selected' : '' ?>>Dikeringkan</option>
-                    <option value="disetrika" <?= ($filters['status'] ?? '') == 'disetrika' ? 'selected' : '' ?>>Disetrika</option>
-                    <option value="siap_diambil" <?= ($filters['status'] ?? '') == 'siap_diambil' ? 'selected' : '' ?>>Siap Diambil</option>
-                    <option value="selesai" <?= ($filters['status'] ?? '') == 'selesai' ? 'selected' : '' ?>>Selesai</option>
+                    <option value="">All Statuses</option>
+                    <option value="diterima" <?= ($filters['status'] ?? '') == 'diterima' ? 'selected' : '' ?>>Received</option>
+                    <option value="dicuci" <?= ($filters['status'] ?? '') == 'dicuci' ? 'selected' : '' ?>>Washing</option>
+                    <option value="dikeringkan" <?= ($filters['status'] ?? '') == 'dikeringkan' ? 'selected' : '' ?>>Drying</option>
+                    <option value="disetrika" <?= ($filters['status'] ?? '') == 'disetrika' ? 'selected' : '' ?>>Ironing</option>
+                    <option value="siap_diambil" <?= ($filters['status'] ?? '') == 'siap_diambil' ? 'selected' : '' ?>>Ready for Collection</option>
+                    <option value="selesai" <?= ($filters['status'] ?? '') == 'selesai' ? 'selected' : '' ?>>Completed</option>
                 </select>
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Status Pembayaran</label>
+                <label class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Payment Status</label>
                 <select name="payment_status" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-xs sm:text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                    <option value="">Semua Pembayaran</option>
-                    <option value="belum_bayar" <?= ($filters['payment_status'] ?? '') == 'belum_bayar' ? 'selected' : '' ?>>Belum Bayar</option>
-                    <option value="dp" <?= ($filters['payment_status'] ?? '') == 'dp' ? 'selected' : '' ?>>DP (Sebagian)</option>
-                    <option value="lunas" <?= ($filters['payment_status'] ?? '') == 'lunas' ? 'selected' : '' ?>>Lunas</option>
+                    <option value="">All Payments</option>
+                    <option value="belum_bayar" <?= ($filters['payment_status'] ?? '') == 'belum_bayar' ? 'selected' : '' ?>>Unpaid</option>
+                    <option value="dp" <?= ($filters['payment_status'] ?? '') == 'dp' ? 'selected' : '' ?>>Partial Payment</option>
+                    <option value="lunas" <?= ($filters['payment_status'] ?? '') == 'lunas' ? 'selected' : '' ?>>Paid</option>
                 </select>
             </div>
 
@@ -72,20 +72,20 @@
             <table class="w-full text-left text-xs">
                 <thead>
                     <tr class="border-b border-gray-100 dark:border-white/10">
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Kode Transaksi</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Pelanggan</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Total Tagihan</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Status Pengerjaan</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Pembayaran</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Estimasi Selesai</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Aksi</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Order Code</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Customer</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Total Bill</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Order Status</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Payment</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Estimated Completion</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-white/5 text-navy-700 dark:text-white font-medium">
                     <?php if (empty($transactions)): ?>
                         <tr>
                             <td colspan="7" class="px-6 py-10 text-center text-gray-400 dark:text-gray-500">
-                                Tidak ada transaksi yang sesuai dengan kriteria filter.
+                                No orders match the selected filters.
                             </td>
                         </tr>
                     <?php else: ?>
@@ -115,7 +115,7 @@
                                         $badgeClass = $statusBadges[$tx['status']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold capitalize <?= $badgeClass ?>">
-                                        <?= str_replace('_', ' ', $tx['status']) ?>
+                                        <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$tx['status']] ?? str_replace('_', ' ', $tx['status'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
@@ -128,7 +128,7 @@
                                         $pBadge = $payBadges[$tx['payment_status']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider <?= $pBadge ?>">
-                                        <?= str_replace('_', ' ', $tx['payment_status']) ?>
+                                        <?= esc(['diterima'=>'Received','dicuci'=>'Washing','dikeringkan'=>'Drying','disetrika'=>'Ironing','siap_diambil'=>'Ready for Collection','selesai'=>'Completed','belum_bayar'=>'Unpaid','dp'=>'Partial Payment','lunas'=>'Paid','kiloan'=>'By Weight','satuan'=>'Per Item','ekspres'=>'Express','tunai'=>'Cash','transfer'=>'Bank Transfer','kasir'=>'Cashier'][$tx['payment_status']] ?? str_replace('_', ' ', $tx['payment_status'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-gray-400 dark:text-gray-400 text-[11px]">
@@ -136,13 +136,13 @@
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex items-center justify-end gap-1.5">
-                                        <a href="<?= base_url('transactions/detail/' . $tx['id']) ?>" class="p-2 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-brand-50 hover:text-brand-600 text-gray-600 dark:text-gray-300 transition-colors" title="Detail Pesanan">
+                                        <a href="<?= base_url('transactions/detail/' . $tx['id']) ?>" class="p-2 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-brand-50 hover:text-brand-600 text-gray-600 dark:text-gray-300 transition-colors" title="Order Details">
                                             <i data-lucide="eye" class="w-4 h-4"></i>
                                         </a>
-                                        <a href="<?= base_url('transactions/print/' . $tx['id']) ?>" target="_blank" class="p-2 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-teal-50 hover:text-teal-600 text-gray-600 dark:text-gray-300 transition-colors" title="Cetak Nota">
+                                        <a href="<?= base_url('transactions/print/' . $tx['id']) ?>" target="_blank" class="p-2 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-teal-50 hover:text-teal-600 text-gray-600 dark:text-gray-300 transition-colors" title="Print Receipt">
                                             <i data-lucide="printer" class="w-4 h-4"></i>
                                         </a>
-                                        <button type="button" @click="confirmDelete('<?= base_url('transactions/delete/' . $tx['id']) ?>', 'Hapus Transaksi', 'Apakah Anda yakin ingin menghapus transaksi ini? Data akan diarsipkan (soft delete).')" class="p-2 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-rose-50 hover:text-rose-600 text-gray-600 dark:text-gray-300 transition-colors" title="Hapus Transaksi">
+                                        <button type="button" @click="confirmDelete('<?= base_url('transactions/delete/' . $tx['id']) ?>', 'Delete Order', 'Are you sure you want to archive this order?')" class="p-2 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-rose-50 hover:text-rose-600 text-gray-600 dark:text-gray-300 transition-colors" title="Delete Order">
                                             <i data-lucide="trash-2" class="w-4 h-4"></i>
                                         </button>
                                     </div>

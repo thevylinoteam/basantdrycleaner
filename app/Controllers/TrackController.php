@@ -39,7 +39,7 @@ class TrackController extends BaseController
 
         if (empty($keyword)) {
             if (!$this->wantsJson()) {
-                return view('track/index', ['error' => 'Silakan masukkan kode transaksi atau nomor HP pelanggan.', 'keyword' => '']);
+                return view('track/index', ['error' => 'Enter the order code or customer mobile number.', 'keyword' => '']);
             }
             return $this->response->setJSON([
                 'status'  => 'error',
@@ -55,7 +55,7 @@ class TrackController extends BaseController
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Pesanan laundry tidak ditemukan dengan kata kunci tersebut.',
+                'message' => 'No matching laundry orders found.',
             ])->setStatusCode(404);
         }
 

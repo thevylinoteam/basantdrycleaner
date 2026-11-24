@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title ?? 'Horizon Laundry - Sistem Informasi Pengelolaan Laundry') ?></title>
+    <title><?= esc($title ?? 'Basant Dry Cleaners - Management System') ?></title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?= base_url('logo-laundry.png') ?>">
+    <link rel="icon" type="image/webp" href="<?= base_url('basant-brand.webp') ?>">
     
     <!-- Google Fonts: DM Sans & Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,19 +36,19 @@
                     },
                     colors: {
                         lightPrimary: '#F4F7FE',
-                        blueSecondary: '#4318FF',
-                        brandLinear: '#868CFF',
+                        blueSecondary: '#1CB6FC',
+                        brandLinear: '#89B92E',
                         brand: {
-                            50: '#E9E3FF',
-                            100: '#C0B8FE',
-                            200: '#A195FD',
-                            300: '#8171FC',
-                            400: '#7551FF',
-                            500: '#422AFB',
-                            600: '#3311DB',
-                            700: '#2111A5',
-                            800: '#190793',
-                            900: '#11047A',
+                            50: '#E8F7FE',
+                            100: '#C1EAFE',
+                            200: '#9BDDFE',
+                            300: '#70CFFC',
+                            400: '#36B7F3',
+                            500: '#087CB7',
+                            600: '#08699D',
+                            700: '#15527F',
+                            800: '#183862',
+                            900: '#102747',
                         },
                         navy: {
                             50: '#d0dcfb',
@@ -111,7 +111,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
-        function confirmDelete(url, title = 'Konfirmasi Hapus Data', text = 'Apakah Anda yakin ingin menghapus data ini?') {
+        function confirmDelete(url, title = 'Confirm Deletion', text = 'Are you sure you want to delete this record?') {
             const isDark = document.documentElement.classList.contains('dark');
             Swal.fire({
                 title: title,
@@ -120,8 +120,8 @@
                 showCancelButton: true,
                 confirmButtonColor: '#e11d48',
                 cancelButtonColor: '#707eae',
-                confirmButtonText: 'Ya, Hapus Data',
-                cancelButtonText: 'Batal',
+                confirmButtonText: 'Yes, Delete',
+                cancelButtonText: 'Cancel',
                 reverseButtons: true,
                 background: isDark ? '#111c44' : '#ffffff',
                 color: isDark ? '#ffffff' : '#1B254B',
@@ -173,10 +173,10 @@
         <aside class="hidden xl:flex xl:flex-col xl:w-[290px] xl:fixed xl:inset-y-0 bg-white dark:bg-navy-800 shadow-3xl shadow-shadow-500 dark:shadow-none z-50 transition-all duration-200">
             <!-- Brand Logo -->
             <div class="mx-7 mt-8 mb-6 flex items-center gap-3">
-                <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo Horizon Laundry" class="w-10 h-10 object-cover rounded-full drop-shadow-md">
+                <img src="<?= base_url('basant-brand.webp') ?>" alt="Basant Dry Cleaners" class="w-24 h-14 object-contain bg-white rounded-lg p-1">
                 <div>
                     <h1 class="font-poppins text-xl font-bold tracking-tight text-navy-700 dark:text-white uppercase leading-none">
-                        Horizon <span class="font-normal text-brand-500">Laundry</span>
+                        Basant <span class="font-normal text-brand-500">Dry Cleaners</span>
                     </h1>
                     <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium tracking-wide mt-1">Management System</p>
                 </div>
@@ -205,9 +205,9 @@
                     };
                 ?>
 
-                <!-- Section: Utama -->
+                <!-- Section: Main -->
                 <div>
-                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Utama</p>
+                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Main</p>
                     <nav class="space-y-1">
                         <?php 
                             $isDashboard = ($seg1 == 'dashboard' || $seg1 == ''); 
@@ -225,9 +225,9 @@
                     </nav>
                 </div>
 
-                <!-- Section: Operasional -->
+                <!-- Section: Operations -->
                 <div>
-                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Operasional</p>
+                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Operations</p>
                     <nav class="space-y-1">
                         <?php 
                             $isCreateTx = ($seg1 == 'transactions' && $seg2 == 'create'); 
@@ -237,7 +237,7 @@
                             <span class="<?= $cTxCls['icon'] ?>">
                                 <i data-lucide="plus-circle" class="w-5 h-5"></i>
                             </span>
-                            <span class="ml-3 leading-none">Buat Transaksi</span>
+                            <span class="ml-3 leading-none">Create Order</span>
                             <?php if ($isCreateTx): ?>
                                 <div class="absolute right-0 top-1.5 h-8 w-1 rounded-l-lg bg-brand-500 dark:bg-brand-400"></div>
                             <?php endif; ?>
@@ -251,7 +251,7 @@
                             <span class="<?= $lTxCls['icon'] ?>">
                                 <i data-lucide="receipt" class="w-5 h-5"></i>
                             </span>
-                            <span class="ml-3 leading-none">Daftar Transaksi</span>
+                            <span class="ml-3 leading-none">Orders</span>
                             <?php if ($isListTx): ?>
                                 <div class="absolute right-0 top-1.5 h-8 w-1 rounded-l-lg bg-brand-500 dark:bg-brand-400"></div>
                             <?php endif; ?>
@@ -265,7 +265,7 @@
                             <span class="<?= $custCls['icon'] ?>">
                                 <i data-lucide="users" class="w-5 h-5"></i>
                             </span>
-                            <span class="ml-3 leading-none">Data Pelanggan</span>
+                            <span class="ml-3 leading-none">Customers</span>
                             <?php if ($isCustomers): ?>
                                 <div class="absolute right-0 top-1.5 h-8 w-1 rounded-l-lg bg-brand-500 dark:bg-brand-400"></div>
                             <?php endif; ?>
@@ -279,7 +279,7 @@
                             <span class="<?= $svcCls['icon'] ?>">
                                 <i data-lucide="sparkle" class="w-5 h-5"></i>
                             </span>
-                            <span class="ml-3 leading-none">Layanan & Tarif</span>
+                            <span class="ml-3 leading-none">Services & Pricing</span>
                             <?php if ($isServices): ?>
                                 <div class="absolute right-0 top-1.5 h-8 w-1 rounded-l-lg bg-brand-500 dark:bg-brand-400"></div>
                             <?php endif; ?>
@@ -287,9 +287,9 @@
                     </nav>
                 </div>
 
-                <!-- Section: Laporan -->
+                <!-- Section: Reports -->
                 <div>
-                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Laporan</p>
+                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Reports</p>
                     <nav class="space-y-1">
                         <?php 
                             $isRev = ($seg1 == 'reports' && $seg2 == 'revenue'); 
@@ -299,7 +299,7 @@
                             <span class="<?= $revCls['icon'] ?>">
                                 <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
                             </span>
-                            <span class="ml-3 leading-none">Laporan Pendapatan</span>
+                            <span class="ml-3 leading-none">Revenue Report</span>
                             <?php if ($isRev): ?>
                                 <div class="absolute right-0 top-1.5 h-8 w-1 rounded-l-lg bg-brand-500 dark:bg-brand-400"></div>
                             <?php endif; ?>
@@ -313,7 +313,7 @@
                             <span class="<?= $srepCls['icon'] ?>">
                                 <i data-lucide="pie-chart" class="w-5 h-5"></i>
                             </span>
-                            <span class="ml-3 leading-none">Laporan Layanan</span>
+                            <span class="ml-3 leading-none">Service Report</span>
                             <?php if ($isSvc): ?>
                                 <div class="absolute right-0 top-1.5 h-8 w-1 rounded-l-lg bg-brand-500 dark:bg-brand-400"></div>
                             <?php endif; ?>
@@ -321,14 +321,14 @@
                     </nav>
                 </div>
 
-                <!-- Section: Publik -->
+                <!-- Section: Public -->
                 <div>
-                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Publik</p>
+                    <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">Public</p>
                     <nav class="space-y-1">
                         <a href="<?= base_url('track') ?>" target="_blank" class="relative flex items-center justify-between py-2.5 px-4 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-navy-700 dark:hover:text-white hover:bg-lightPrimary/40 dark:hover:bg-navy-700/30 transition-all">
                             <span class="flex items-center">
                                 <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
-                                <span class="ml-3 leading-none">Cek Status Publik</span>
+                                <span class="ml-3 leading-none">Public Order Tracking</span>
                             </span>
                             <i data-lucide="external-link" class="w-4 h-4 text-gray-400"></i>
                         </a>
@@ -336,16 +336,16 @@
                 </div>
             </div>
 
-            <!-- Horizon Sidebar Promotion/Info Card -->
+            <!-- Basant Sidebar Promotion/Info Card -->
             <div class="px-5 py-4">
                 <div class="relative flex flex-col items-center rounded-[20px] bg-gradient-to-br from-brand-500 to-brand-600 p-4 text-center text-white shadow-lg shadow-brand-500/25">
                     <div class="absolute -top-6 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white bg-white dark:bg-navy-800 dark:border-navy-800 shadow-md overflow-hidden">
-                        <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo" class="w-full h-full object-cover rounded-full">
+                        <img src="<?= base_url('basant-brand.webp') ?>" alt="Basant Dry Cleaners" class="w-24 h-14 object-contain bg-white rounded-lg p-1">
                     </div>
-                    <h4 class="mt-4 font-bold text-sm">Laundry Modern Hub</h4>
-                    <p class="text-[11px] text-brand-100 mt-1 leading-snug">Kelola cucian pelanggan lebih cepat, rapi, dan otomatis.</p>
+                    <h4 class="mt-4 font-bold text-sm">Dry Cleaning Management</h4>
+                    <p class="text-[11px] text-brand-100 mt-1 leading-snug">Manage customer orders efficiently.</p>
                     <a href="<?= base_url('transactions/create') ?>" class="mt-3 w-full rounded-xl bg-white/20 hover:bg-white/30 py-2 text-xs font-bold text-white backdrop-blur transition-all">
-                        + Order Baru
+                        + New Order
                     </a>
                 </div>
             </div>
@@ -353,7 +353,7 @@
 
         <!-- Main Content Area -->
         <div class="xl:pl-[290px] flex flex-col flex-1 min-w-0 font-dm">
-            <!-- Floating Horizon UI Navbar -->
+            <!-- Floating Basant UI Navbar -->
             <header class="sticky top-3 z-40 mx-3 md:mx-6 mt-3">
                 <div class="flex flex-row flex-wrap items-center justify-between rounded-2xl bg-white/80 dark:bg-navy-800/80 p-2.5 backdrop-blur-xl shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
                     <!-- Left: Breadcrumb & Page Title -->
@@ -402,8 +402,8 @@
                             </button>
                             <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute right-0 mt-3 w-80 sm:w-96 rounded-[20px] bg-white dark:bg-navy-800 p-4 shadow-3xl shadow-shadow-500 dark:shadow-none border border-gray-100 dark:border-white/10 z-50">
                                 <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-white/10">
-                                    <p class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Pemberitahuan Laundry</p>
-                                    <span class="text-xs font-semibold text-brand-500">3 Baru</span>
+                                    <p class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Laundry Notifications</p>
+                                    <span class="text-xs font-semibold text-brand-500">3 New</span>
                                 </div>
                                 <div class="mt-3 space-y-2.5 text-xs max-h-72 overflow-y-auto">
                                     <!-- Notification 1 -->
@@ -413,10 +413,10 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Cucian Siap Diambil</p>
-                                                <span class="text-[10px] text-gray-400">Baru saja</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">Orders Ready for Collection</p>
+                                                <span class="text-[10px] text-gray-400">Just now</span>
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Pesanan yang telah selesai dipacking siap diserahkan ke pelanggan.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Packed orders are ready for collection.</p>
                                         </div>
                                     </a>
 
@@ -427,10 +427,10 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Pembayaran Diterima</p>
-                                                <span class="text-[10px] text-gray-400">10 mnt lalu</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">Payment Received</p>
+                                                <span class="text-[10px] text-gray-400">10 min ago</span>
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Kas masuk pembayaran tagihan laundry telah diverifikasi.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Order payments have been verified.</p>
                                         </div>
                                     </a>
 
@@ -441,17 +441,17 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Pengingat Jadwal</p>
-                                                <span class="text-[10px] text-gray-400">Hari ini</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">Schedule Reminder</p>
+                                                <span class="text-[10px] text-gray-400">Today</span>
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Periksa antrian cucian yang mendekati batas waktu estimasi selesai.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Check orders approaching their estimated completion time.</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="pt-2.5 mt-2 border-t border-gray-100 dark:border-white/10 text-center">
                                     <a href="<?= base_url('transactions') ?>" class="text-[11px] font-bold text-brand-500 hover:text-brand-600 dark:text-brand-400 inline-flex items-center gap-1">
-                                        <span>Lihat Semua Aktivitas Transaksi</span>
+                                        <span>View All Order Activity</span>
                                         <i data-lucide="arrow-right" class="w-3 h-3"></i>
                                     </a>
                                 </div>
@@ -465,8 +465,8 @@
                             </button>
                             <div x-show="userOpen" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute right-0 mt-3 w-60 rounded-[20px] bg-white dark:bg-navy-800 p-4 shadow-3xl shadow-shadow-500 dark:shadow-none border border-gray-100 dark:border-white/10 z-50">
                                 <div class="pb-3 border-b border-gray-100 dark:border-white/10">
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">👋 Halo,</p>
-                                    <p class="text-sm font-bold text-navy-700 dark:text-white truncate"><?= esc(session()->get('userName') ?? 'Admin Laundry') ?></p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">👋 Hello,</p>
+                                    <p class="text-sm font-bold text-navy-700 dark:text-white truncate"><?= esc(session()->get('userName') ?? 'Laundry Administrator') ?></p>
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-50 text-brand-600 dark:bg-brand-900/60 dark:text-brand-300 mt-1">
                                         <?= esc(session()->get('userRole') ?? 'admin') ?>
                                     </span>
@@ -474,11 +474,11 @@
                                 <div class="mt-3 flex flex-col space-y-2 text-xs">
                                     <a href="<?= base_url('profile') ?>" class="flex items-center gap-2 py-1.5 px-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-lightPrimary dark:hover:bg-navy-700 font-medium transition-colors">
                                         <i data-lucide="user" class="w-4 h-4 text-brand-500"></i>
-                                        Pengaturan Akun
+                                        Account Settings
                                     </a>
                                     <a href="<?= base_url('logout') ?>" class="flex items-center gap-2 py-1.5 px-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 font-semibold transition-colors">
                                         <i data-lucide="log-out" class="w-4 h-4"></i>
-                                        Keluar (Logout)
+                                        Sign Out
                                     </a>
                                 </div>
                             </div>
@@ -522,9 +522,9 @@
                 <?= $this->renderSection('content') ?>
             </main>
 
-            <!-- Horizon Footer -->
+            <!-- Basant Footer -->
             <footer class="mt-auto py-5 text-center text-xs text-gray-500 dark:text-gray-400 font-medium">
-                <p>&copy; <?= date('Y') ?> Horizon Laundry UI. All Rights Reserved. Built with CodeIgniter 4.</p>
+                <p>&copy; <?= date('Y') ?> Basant Dry Cleaners. All Rights Reserved. Built with CodeIgniter 4.</p>
             </footer>
         </div>
     </div>
@@ -536,8 +536,8 @@
             <div x-show="sidebarOpen" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="relative mr-16 flex-1 w-full max-w-xs bg-white dark:bg-navy-800 text-navy-700 dark:text-white flex flex-col shadow-2xl">
                 <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 dark:border-white/10">
                     <div class="flex items-center gap-3">
-                        <img src="<?= base_url('logo-laundry.png') ?>" alt="Logo" class="w-9 h-9 object-cover rounded-full">
-                        <span class="font-poppins font-bold text-lg text-navy-700 dark:text-white">HORIZON <span class="font-normal text-brand-500">LAUNDRY</span></span>
+                        <img src="<?= base_url('basant-brand.webp') ?>" alt="Basant Dry Cleaners" class="w-24 h-14 object-contain bg-white rounded-lg p-1">
+                        <span class="font-poppins font-bold text-lg text-navy-700 dark:text-white">BASANT <span class="font-normal text-brand-500">DRY CLEANERS</span></span>
                     </div>
                     <button @click="sidebarOpen = false" class="p-2 text-gray-500 dark:text-gray-400 hover:text-navy-700 dark:hover:text-white">
                         <i data-lucide="x" class="w-5 h-5"></i>
@@ -548,25 +548,25 @@
                         <i data-lucide="layout-dashboard" class="w-5 h-5 text-brand-500"></i> Dashboard
                     </a>
                     <a href="<?= base_url('transactions/create') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="plus-circle" class="w-5 h-5 text-brand-500"></i> Buat Transaksi
+                        <i data-lucide="plus-circle" class="w-5 h-5 text-brand-500"></i> Create Order
                     </a>
                     <a href="<?= base_url('transactions') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="receipt" class="w-5 h-5 text-brand-500"></i> Daftar Transaksi
+                        <i data-lucide="receipt" class="w-5 h-5 text-brand-500"></i> Orders
                     </a>
                     <a href="<?= base_url('customers') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="users" class="w-5 h-5 text-brand-500"></i> Data Pelanggan
+                        <i data-lucide="users" class="w-5 h-5 text-brand-500"></i> Customers
                     </a>
                     <a href="<?= base_url('services') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="sparkle" class="w-5 h-5 text-brand-500"></i> Layanan & Tarif
+                        <i data-lucide="sparkle" class="w-5 h-5 text-brand-500"></i> Services & Pricing
                     </a>
                     <a href="<?= base_url('reports/revenue') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-500"></i> Laporan Pendapatan
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-500"></i> Revenue Report
                     </a>
                     <a href="<?= base_url('reports/services') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="pie-chart" class="w-5 h-5 text-brand-500"></i> Laporan Layanan
+                        <i data-lucide="pie-chart" class="w-5 h-5 text-brand-500"></i> Service Report
                     </a>
                     <a href="<?= base_url('profile') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="user" class="w-5 h-5 text-brand-500"></i> Profil & Password
+                        <i data-lucide="user" class="w-5 h-5 text-brand-500"></i> Profile & Password
                     </a>
                     <a href="<?= base_url('logout') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30">
                         <i data-lucide="log-out" class="w-5 h-5"></i> Logout
