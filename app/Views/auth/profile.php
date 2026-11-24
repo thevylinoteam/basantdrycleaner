@@ -8,8 +8,8 @@
     <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
-            <h2 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Pengaturan Akun</h2>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Kelola informasi profil dan keamanan kata sandi Anda</p>
+            <h2 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Account Settings</h2>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Manage your profile and password security</p>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
             </div>
 
             <div class="pt-4 border-t border-gray-100 dark:border-white/10 text-xs text-gray-500 dark:text-gray-400 space-y-1">
-                <p>Terdaftar sejak:</p>
+                <p>Registered since:</p>
                 <p class="font-bold text-navy-700 dark:text-white"><?= date('d M Y, H:i', strtotime($user['created_at'] ?? 'now')) ?></p>
             </div>
         </div>
@@ -38,34 +38,34 @@
         <div class="md:col-span-2 rounded-[20px] bg-white dark:bg-navy-800 p-6 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
             <div class="flex items-center gap-2 pb-4 mb-5 border-b border-gray-100 dark:border-white/10">
                 <i data-lucide="key" class="w-5 h-5 text-brand-500"></i>
-                <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Ganti Kata Sandi</h3>
+                <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Change Password</h3>
             </div>
 
             <form action="<?= base_url('profile/change-password') ?>" method="POST" class="space-y-4">
                 <?= csrf_field() ?>
 
                 <div>
-                    <label for="current_password" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Kata Sandi Saat Ini</label>
+                    <label for="current_password" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Current Password</label>
                     <div class="relative">
-                        <input type="password" name="current_password" id="current_password" required placeholder="Masukkan kata sandi lama" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
+                        <input type="password" name="current_password" id="current_password" required placeholder="Enter current password" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label for="new_password" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Kata Sandi Baru</label>
-                        <input type="password" name="new_password" id="new_password" required minlength="6" placeholder="Minimal 6 karakter" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
+                        <label for="new_password" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">New Password</label>
+                        <input type="password" name="new_password" id="new_password" required minlength="6" placeholder="At least 6 characters" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                     </div>
                     <div>
-                        <label for="new_password_confirm" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Konfirmasi Kata Sandi Baru</label>
-                        <input type="password" name="new_password_confirm" id="new_password_confirm" required minlength="6" placeholder="Ulangi kata sandi baru" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
+                        <label for="new_password_confirm" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Confirm New Password</label>
+                        <input type="password" name="new_password_confirm" id="new_password_confirm" required minlength="6" placeholder="Repeat new password" class="w-full px-4 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
                     </div>
                 </div>
 
                 <div class="pt-4 flex justify-end border-t border-gray-100 dark:border-white/10">
                     <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all">
                         <i data-lucide="save" class="w-4 h-4"></i>
-                        Simpan Perubahan
+                        Save Perubahan
                     </button>
                 </div>
             </form>

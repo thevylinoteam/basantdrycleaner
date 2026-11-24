@@ -8,8 +8,8 @@
     <!-- Top Row: Welcome & Quick Action Buttons -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Ringkasan Operasional</h1>
-            <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">Pantau transaksi dan progres cucian laundry hari ini (<?= date('d F Y') ?>)</p>
+            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Operations Overview</h1>
+            <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">Monitor daily orders and service progress (<?= date('d F Y') ?>)</p>
         </div>
         <div class="flex items-center gap-2.5">
             <a href="<?= base_url('transactions/create') ?>" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all">
@@ -18,20 +18,20 @@
             </a>
             <a href="<?= base_url('customers') ?>" class="inline-flex items-center gap-2 px-3.5 py-2.5 bg-white dark:bg-navy-800 hover:bg-lightPrimary dark:hover:bg-navy-700 text-navy-700 dark:text-white text-xs font-bold rounded-xl border border-gray-200 dark:border-navy-700 shadow-sm transition-colors">
                 <i data-lucide="users" class="w-4 h-4 text-brand-500"></i>
-                Pelanggan
+                Customer
             </a>
         </div>
     </div>
 
     <!-- 4 Horizon UI Metric Widgets -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-        <!-- Widget 1: Transaksi Hari Ini -->
+        <!-- Widget 1: Orders Today -->
         <div class="relative flex items-center rounded-[20px] bg-white dark:bg-navy-800 p-4 sm:p-5 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
             <div class="flex h-14 w-14 items-center justify-center rounded-full bg-lightPrimary dark:bg-navy-700 text-brand-500 dark:text-brand-400 flex-shrink-0">
                 <i data-lucide="shopping-bag" class="w-7 h-7"></i>
             </div>
             <div class="ml-4 flex flex-col justify-center min-w-0">
-                <p class="font-dm text-xs font-medium text-gray-500 dark:text-gray-400">Transaksi Hari Ini</p>
+                <p class="font-dm text-xs font-medium text-gray-500 dark:text-gray-400">Orders Today</p>
                 <h4 class="text-xl sm:text-2xl font-bold text-navy-700 dark:text-white font-poppins mt-0.5">
                     <?= number_format($stats['today_transactions_count'] ?? 0) ?>
                 </h4>
@@ -41,15 +41,15 @@
             </div>
         </div>
 
-        <!-- Widget 2: Pendapatan Hari Ini -->
+        <!-- Widget 2: Revenue Today -->
         <div class="relative flex items-center rounded-[20px] bg-white dark:bg-navy-800 p-4 sm:p-5 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
             <div class="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 dark:text-emerald-400 flex-shrink-0">
                 <i data-lucide="wallet" class="w-7 h-7"></i>
             </div>
             <div class="ml-4 flex flex-col justify-center min-w-0">
-                <p class="font-dm text-xs font-medium text-gray-500 dark:text-gray-400">Pendapatan Hari Ini</p>
+                <p class="font-dm text-xs font-medium text-gray-500 dark:text-gray-400">Revenue Today</p>
                 <h4 class="text-lg sm:text-xl font-bold text-navy-700 dark:text-white font-poppins mt-0.5 truncate">
-                    Rp <?= number_format($stats['today_revenue'] ?? 0, 0, ',', '.') ?>
+                    ₹ <?= number_format($stats['today_revenue'] ?? 0, 2, '.', ',') ?>
                 </h4>
                 <a href="<?= base_url('reports/revenue') ?>" class="text-[11px] font-semibold text-emerald-500 hover:text-emerald-600 mt-1 inline-flex items-center gap-1">
                     Laporan keuangan &rarr;
@@ -57,13 +57,13 @@
             </div>
         </div>
 
-        <!-- Widget 3: Siap Diambil -->
+        <!-- Widget 3: Ready for Collection -->
         <div class="relative flex items-center rounded-[20px] bg-white dark:bg-navy-800 p-4 sm:p-5 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5">
             <div class="flex h-14 w-14 items-center justify-center rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-500 dark:text-amber-400 flex-shrink-0">
                 <i data-lucide="package-check" class="w-7 h-7"></i>
             </div>
             <div class="ml-4 flex flex-col justify-center min-w-0">
-                <p class="font-dm text-xs font-medium text-gray-500 dark:text-gray-400">Siap Diambil</p>
+                <p class="font-dm text-xs font-medium text-gray-500 dark:text-gray-400">Ready for Collection</p>
                 <h4 class="text-xl sm:text-2xl font-bold text-amber-500 font-poppins mt-0.5">
                     <?= number_format($stats['ready_for_pickup_count'] ?? 0) ?>
                 </h4>
@@ -79,8 +79,8 @@
                 <i data-lucide="search" class="w-7 h-7"></i>
             </div>
             <div class="ml-4 flex flex-col justify-center min-w-0">
-                <p class="font-dm text-xs font-medium text-brand-100">Portal Publik</p>
-                <h4 class="text-base sm:text-lg font-bold text-white font-poppins mt-0.5">Cek Resi Tanpa Login</h4>
+                <p class="font-dm text-xs font-medium text-brand-100">Public Portal</p>
+                <h4 class="text-base sm:text-lg font-bold text-white font-poppins mt-0.5">Track Order Without Signing In</h4>
                 <a href="<?= base_url('track') ?>" target="_blank" class="text-[11px] font-semibold text-brand-200 hover:text-white mt-1 inline-flex items-center gap-1">
                     Buka Pelacak &nearr;
                 </a>
@@ -92,8 +92,8 @@
     <div class="rounded-[20px] bg-white dark:bg-navy-800 shadow-3xl shadow-shadow-500 dark:shadow-none border border-white/40 dark:border-white/5 overflow-hidden">
         <div class="px-6 py-5 border-b border-gray-100 dark:border-white/10 flex items-center justify-between">
             <div>
-                <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Transaksi Terbaru</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">5 transaksi terakhir yang tercatat di sistem</p>
+                <h3 class="text-base font-bold text-navy-700 dark:text-white font-poppins">Recent Orders</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Five most recent orders</p>
             </div>
             <a href="<?= base_url('transactions') ?>" class="text-xs font-bold text-brand-500 hover:text-brand-600 inline-flex items-center gap-1">
                 Lihat Semua &rarr;
@@ -104,13 +104,13 @@
             <table class="w-full text-left text-xs">
                 <thead>
                     <tr class="border-b border-gray-100 dark:border-white/10">
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Kode Transaksi</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Pelanggan</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Total Harga</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Status Pengerjaan</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Pembayaran</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Waktu Order</th>
-                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Aksi</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Order Code</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Customer</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Total Price</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Order Status</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Payment</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400">Order Time</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-400 text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-white/5 text-navy-700 dark:text-white font-medium">
@@ -131,7 +131,7 @@
                                     <p class="text-[11px] text-gray-400"><?= esc($tx['customer_phone']) ?></p>
                                 </td>
                                 <td class="px-6 py-4 font-bold text-navy-700 dark:text-white font-poppins">
-                                    Rp <?= number_format($tx['total_price'], 0, ',', '.') ?>
+                                    ₹ <?= number_format($tx['total_price'], 2, '.', ',') ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     <?php
@@ -146,7 +146,7 @@
                                         $badgeClass = $statusBadges[$tx['status']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold capitalize <?= $badgeClass ?>">
-                                        <?= str_replace('_', ' ', $tx['status']) ?>
+                                        <?= esc(basant_label($tx['status'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
@@ -159,7 +159,7 @@
                                         $pBadge = $payBadges[$tx['payment_status']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider <?= $pBadge ?>">
-                                        <?= str_replace('_', ' ', $tx['payment_status']) ?>
+                                        <?= esc(basant_label($tx['payment_status'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-gray-400 dark:text-gray-400 text-[11px]">

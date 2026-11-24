@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\TransactionModel;
-use CodeIgniter\HTTP\ResponseInterface;
 
 class TrackController extends BaseController
 {
@@ -15,59 +14,48 @@ class TrackController extends BaseController
         $this->transactionModel = new TransactionModel();
     }
 
-    /**
-     * Public tracking view / instructions
-     */
     public function index()
     {
+        $this->response->setHeader('Cache-Control', 'no-store, private');
         if (!$this->wantsJson()) {
             return view('track/index');
         }
-
-        return $this->response->setJSON([
-            'status'  => 'info',
-            'message' => 'Masukkan kode transaksi (contoh: LDY-YYYYMMDD-0001) atau nomor HP pelanggan untuk melacak status cucian.',
-        ]);
+        return $this->response->setJSON(['status' => 'info', 'message' => 'Enter your order code and registered mobile number.']);
     }
 
-    /**
-     * Track status by transaction code or phone number
-     */
     public function check()
     {
-        $keyword = trim((string) ($this->request->getVar('keyword') ?? $this->request->getVar('code') ?? $this->request->getVar('phone') ?? ''));
-
-        if (empty($keyword)) {
-            if (!$this->wantsJson()) {
-                return view('track/index', ['error' => 'Silakan masukkan kode transaksi atau nomor HP pelanggan.', 'keyword' => '']);
-            }
-            return $this->response->setJSON([
-                'status'  => 'error',
-                'message' => 'Parameter pencarian (kode transaksi atau nomor HP) wajib diisi.',
-            ])->setStatusCode(400);
+        $this->response->setHeader('Cache-Control', 'no-store, private');
+        $code = strtoupper(trim((string) ($this->request->getPost('keyword') ?? '')));
+        $phone = trim((string) ($this->request->getPost('phone') ?? ''));
+        if (!service('throttler')->check('basant-track-' . hash('sha256', $this->request->getIPAddress()), 10, 60)) {
+            return $this->response->setStatusCode(429)->setBody('Too many attempts. Please try again in a minute.');
         }
-
-        $results = $this->transactionModel->trackByCodeOrPhone($keyword);
-
-        if (empty($results)) {
-            if (!$this->wantsJson()) {
-                return view('track/index', ['error' => "Pesanan tidak ditemukan dengan kata kunci '{$keyword}'.", 'keyword' => $keyword]);
+        $results = [];
+        if (preg_match('/^[A-Z0-9-]{5,40}$/D', $code) && preg_match('/^[+0-9 ()-]{10,20}$/D', $phone)) {
+            foreach ($this->transactionModel->trackByCodeOrPhone($code) as $tx) {
+                if (strcasecmp($code, (string) $tx['transaction_code']) === 0 &&
+                    hash_equals(basant_whatsapp((string) $tx['customer_phone']), basant_whatsapp($phone))) {
+                    $results[] = [
+                        'transaction_code' => $tx['transaction_code'],
+                        'status' => $tx['status'],
+                        'payment_status' => $tx['payment_status'],
+                        'estimated_done_at' => $tx['estimated_done_at'],
+                        'balance_due' => $tx['balance_due'],
+                        'items' => array_map(static fn($item) => array_intersect_key($item, array_flip(['service_name', 'qty', 'service_unit', 'subtotal'])), $tx['items']),
+                    ];
+                }
             }
-            return $this->response->setJSON([
-                'status'  => 'error',
-                'message' => 'Pesanan laundry tidak ditemukan dengan kata kunci tersebut.',
-            ])->setStatusCode(404);
         }
-
+        if (!$results) {
+            if (!$this->wantsJson()) {
+                return view('track/index', ['error' => 'No matching order found. Check your order code and registered mobile number.', 'keyword' => $code]);
+            }
+            return $this->response->setStatusCode(404)->setJSON(['status' => 'error', 'message' => 'No matching order found.']);
+        }
         if (!$this->wantsJson()) {
-            return view('track/index', ['results' => $results, 'keyword' => $keyword]);
+            return view('track/index', ['results' => $results, 'keyword' => $code]);
         }
-
-        return $this->response->setJSON([
-            'status'  => 'success',
-            'count'   => count($results),
-            'keyword' => $keyword,
-            'data'    => $results,
-        ]);
+        return $this->response->setJSON(['status' => 'success', 'data' => $results]);
     }
 }
