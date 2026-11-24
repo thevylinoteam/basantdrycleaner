@@ -23,14 +23,14 @@
     <?php if (session()->getFlashdata('error')): ?>
         <div class="mb-5 p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2.5">
             <i data-lucide="alert-circle" class="w-4 h-4 text-rose-500 flex-shrink-0"></i>
-            <span><?= session()->getFlashdata('error') ?></span>
+            <span><?= esc(session()->getFlashdata('error')) ?></span>
         </div>
     <?php endif; ?>
 
     <?php if (session()->getFlashdata('success')): ?>
         <div class="mb-5 p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs flex items-center gap-2.5">
             <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500 flex-shrink-0"></i>
-            <span><?= session()->getFlashdata('success') ?></span>
+            <span><?= esc(session()->getFlashdata('success')) ?></span>
         </div>
     <?php endif; ?>
 

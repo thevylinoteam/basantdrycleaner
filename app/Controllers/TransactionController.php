@@ -239,11 +239,11 @@ class TransactionController extends BaseController
         } catch (\Throwable $e) {
             $db->transRollback();
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Gagal membuat transaksi: ' . $e->getMessage());
+                return redirect()->back()->withInput()->with('error', 'Could not create order. Please try again.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Gagal membuat transaksi: ' . $e->getMessage(),
+                'message' => 'Could not create order. Please try again.',
             ])->setStatusCode(500);
         }
     }
@@ -321,7 +321,7 @@ class TransactionController extends BaseController
             ])->setStatusCode(400);
         }
 
-        // FR-26 Business Rule: Selesai/Diambil requires payment to be LUNAS
+        // FR-26 Business Rule: Completed/Diambil requires payment to be LUNAS
         if ($newStatus === TransactionModel::STATUS_SELESAI) {
             $paymentTotal = $this->paymentModel->getTotalPaid($id);
             if ($paymentTotal < (float) $transaction['total_price']) {
@@ -420,7 +420,7 @@ class TransactionController extends BaseController
         $updatedTransaction = $this->transactionModel->getTransactionWithDetails($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/transactions/detail/' . $id)->with('success', 'Pembayaran sebesar Rp ' . number_format($amount, 0, ',', '.') . ' berhasil dicatat.');
+            return redirect()->to('/transactions/detail/' . $id)->with('success', 'Pembayaran sebesar ₹ ' . number_format($amount, 2, '.', ',') . ' berhasil dicatat.');
         }
 
         return $this->response->setJSON([
@@ -474,9 +474,9 @@ class TransactionController extends BaseController
 
         $receiptPayload = [
             'store' => [
-                'name'    => 'Sistem Informasi Pengelolaan Laundry',
-                'address' => 'Jl. Kebersihan Bersama No. 100, Surabaya',
-                'phone'   => '0812-3456-7890',
+                'name'    => 'Basant Dry Cleaners',
+                'address' => 'Beside Darab Car, Khermai Road, Railway Colony, Satna, M.P.',
+                'phone'   => '+91 88712 80521',
             ],
             'receipt_number'    => $transaction['transaction_code'],
             'printed_at'        => date('Y-m-d H:i:s'),

@@ -39,13 +39,13 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) {
     $routes->post('/customers/store', 'CustomerController::store');
     $routes->get('/customers/edit/(:num)', 'CustomerController::edit/$1');
     $routes->post('/customers/update/(:num)', 'CustomerController::update/$1');
-    $routes->get('/customers/delete/(:num)', 'CustomerController::delete/$1');
+    $routes->post('/customers/delete/(:num)', 'CustomerController::delete/$1');
 
     // Layanan & Tarif (Service Management)
     $routes->get('/services', 'ServiceController::index');
     $routes->post('/services/store', 'ServiceController::store');
     $routes->post('/services/update/(:num)', 'ServiceController::update/$1');
-    $routes->get('/services/delete/(:num)', 'ServiceController::delete/$1');
+    $routes->post('/services/delete/(:num)', 'ServiceController::delete/$1');
 
     // Transaksi (Order Management)
     $routes->get('/transactions', 'TransactionController::index');
@@ -54,7 +54,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) {
     $routes->get('/transactions/detail/(:num)', 'TransactionController::detail/$1');
     $routes->post('/transactions/updateStatus/(:num)', 'TransactionController::updateStatus/$1');
     $routes->post('/transactions/pay/(:num)', 'TransactionController::pay/$1');
-    $routes->get('/transactions/delete/(:num)', 'TransactionController::delete/$1');
+    $routes->post('/transactions/delete/(:num)', 'TransactionController::delete/$1');
     $routes->get('/transactions/print/(:num)', 'TransactionController::print/$1');
 
     // Laporan (Reporting)

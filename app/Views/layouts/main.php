@@ -134,7 +134,9 @@
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = url;
+                    const form = document.getElementById('basant-delete-form');
+                    form.action = url;
+                    form.submit();
                 }
             });
         }
@@ -176,7 +178,7 @@
                 <img src="<?= 'https://basantdrycleaners.com/wp-content/uploads/2022/02/basantdrycleaners.png' ?>" alt="Logo Basant Dry Cleaners" class="w-10 h-10 object-contain bg-white rounded-lg drop-shadow-md">
                 <div>
                     <h1 class="font-poppins text-xl font-bold tracking-tight text-navy-700 dark:text-white uppercase leading-none">
-                        Horizon <span class="font-normal text-brand-500">Laundry</span>
+                        Basant <span class="font-normal text-brand-500">Dry Cleaners</span>
                     </h1>
                     <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium tracking-wide mt-1">Management System</p>
                 </div>
@@ -328,7 +330,7 @@
                         <a href="<?= base_url('track') ?>" target="_blank" class="relative flex items-center justify-between py-2.5 px-4 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-navy-700 dark:hover:text-white hover:bg-lightPrimary/40 dark:hover:bg-navy-700/30 transition-all">
                             <span class="flex items-center">
                                 <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
-                                <span class="ml-3 leading-none">Cek Status Public</span>
+                                <span class="ml-3 leading-none">Track Order</span>
                             </span>
                             <i data-lucide="external-link" class="w-4 h-4 text-gray-400"></i>
                         </a>
@@ -413,10 +415,10 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Cucian Siap Diambil</p>
-                                                <span class="text-[10px] text-gray-400">Baru saja</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">Orders Ready for Collection</p>
+                                                <span class="text-[10px] text-gray-400">Just now</span>
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Pesanan yang telah selesai dipacking siap diserahkan ke pelanggan.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Packed orders are ready for collection.</p>
                                         </div>
                                     </a>
 
@@ -427,10 +429,10 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Pembayaran Diterima</p>
-                                                <span class="text-[10px] text-gray-400">10 mnt lalu</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">Payment Received</p>
+                                                <span class="text-[10px] text-gray-400">10 minutes ago</span>
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Kas masuk pembayaran tagihan laundry telah diverifikasi.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Order payments have been recorded.</p>
                                         </div>
                                     </a>
 
@@ -441,17 +443,17 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center justify-between">
-                                                <p class="font-bold text-navy-700 dark:text-white">Pengingat Jadwal</p>
-                                                <span class="text-[10px] text-gray-400">Hari ini</span>
+                                                <p class="font-bold text-navy-700 dark:text-white">Schedule Reminder</p>
+                                                <span class="text-[10px] text-gray-400">Today</span>
                                             </div>
-                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Periksa antrian cucian yang mendekati batas waktu estimasi selesai.</p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5 leading-snug">Check orders nearing completion.</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="pt-2.5 mt-2 border-t border-gray-100 dark:border-white/10 text-center">
                                     <a href="<?= base_url('transactions') ?>" class="text-[11px] font-bold text-brand-500 hover:text-brand-600 dark:text-brand-400 inline-flex items-center gap-1">
-                                        <span>Lihat Semua Aktivitas Transaksi</span>
+                                        <span>View All Orders</span>
                                         <i data-lucide="arrow-right" class="w-3 h-3"></i>
                                     </a>
                                 </div>
@@ -466,7 +468,7 @@
                             <div x-show="userOpen" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute right-0 mt-3 w-60 rounded-[20px] bg-white dark:bg-navy-800 p-4 shadow-3xl shadow-shadow-500 dark:shadow-none border border-gray-100 dark:border-white/10 z-50">
                                 <div class="pb-3 border-b border-gray-100 dark:border-white/10">
                                     <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">👋 Halo,</p>
-                                    <p class="text-sm font-bold text-navy-700 dark:text-white truncate"><?= esc(session()->get('userName') ?? 'Admin Laundry') ?></p>
+                                    <p class="text-sm font-bold text-navy-700 dark:text-white truncate"><?= esc(session()->get('userName') ?? 'Administrator') ?></p>
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-50 text-brand-600 dark:bg-brand-900/60 dark:text-brand-300 mt-1">
                                         <?= esc(session()->get('userRole') ?? 'admin') ?>
                                     </span>
@@ -478,7 +480,7 @@
                                     </a>
                                     <a href="<?= base_url('logout') ?>" class="flex items-center gap-2 py-1.5 px-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 font-semibold transition-colors">
                                         <i data-lucide="log-out" class="w-4 h-4"></i>
-                                        Keluar (Logout)
+                                        Sign Out
                                     </a>
                                 </div>
                             </div>
@@ -566,7 +568,7 @@
                         <i data-lucide="pie-chart" class="w-5 h-5 text-brand-500"></i> Service Report
                     </a>
                     <a href="<?= base_url('profile') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-lightPrimary dark:hover:bg-navy-700">
-                        <i data-lucide="user" class="w-5 h-5 text-brand-500"></i> Profil & Password
+                        <i data-lucide="user" class="w-5 h-5 text-brand-500"></i> Profile & Password
                     </a>
                     <a href="<?= base_url('logout') ?>" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30">
                         <i data-lucide="log-out" class="w-5 h-5"></i> Logout
@@ -582,5 +584,6 @@
             lucide.createIcons();
         });
     </script>
+    <form id="basant-delete-form" method="POST" hidden><?= csrf_field() ?></form>
 </body>
 </html>
