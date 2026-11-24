@@ -20,11 +20,11 @@ class AuthFilter implements FilterInterface
             if ($isAjax || str_contains($request->getHeaderLine('Accept'), 'application/json')) {
                 return service('response')->setJSON([
                     'status'  => 'error',
-                    'message' => 'Silakan login terlebih dahulu untuk mengakses fitur ini.',
+                    'message' => 'Sign in to access this feature.',
                 ])->setStatusCode(401);
             }
 
-            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+            return redirect()->to('/login')->with('error', 'Please sign in first.');
         }
     }
 

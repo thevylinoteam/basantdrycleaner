@@ -34,7 +34,7 @@ class CustomerModel extends Model
 
     protected $validationMessages = [
         'phone' => [
-            'is_unique' => 'Nomor HP pelanggan ini sudah terdaftar.',
+            'is_unique' => 'This mobile number is already registered.',
         ],
     ];
 

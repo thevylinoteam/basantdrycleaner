@@ -1,7 +1,7 @@
 name: Basant validation
 on:
   push:
-    branches: [basant-english-branding]
+    branches: [basant-english-branding, main]
   pull_request:
     branches: [main]
 permissions:

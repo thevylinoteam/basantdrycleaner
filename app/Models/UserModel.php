@@ -35,7 +35,7 @@ class UserModel extends Model
 
     protected $validationMessages = [
         'email' => [
-            'is_unique' => 'Email sudah terdaftar dalam sistem.',
+            'is_unique' => 'This email is already registered.',
         ],
     ];
 

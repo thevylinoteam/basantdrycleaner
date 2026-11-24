@@ -72,7 +72,7 @@ class CustomerController extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Nomor HP sudah terdaftar atau format nama tidak valid.');
+                return redirect()->back()->withInput()->with('error', 'Mobile number is already registered or the name is invalid.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -90,12 +90,12 @@ class CustomerController extends BaseController
         $newCustomer = $this->customerModel->find($customerId);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/customers')->with('success', 'Pelanggan berhasil ditambahkan.');
+            return redirect()->to('/customers')->with('success', 'Customer added successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Pelanggan berhasil ditambahkan.',
+            'message' => 'Customer added successfully.',
             'data'    => $newCustomer,
         ])->setStatusCode(201);
     }
@@ -108,11 +108,11 @@ class CustomerController extends BaseController
         $customer = $this->customerModel->find($id);
         if (!$customer) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/customers')->with('error', 'Data pelanggan tidak ditemukan.');
+                return redirect()->to('/customers')->with('error', 'Customer not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Data pelanggan tidak ditemukan.',
+                'message' => 'Customer not found.',
             ])->setStatusCode(404);
         }
 
@@ -134,11 +134,11 @@ class CustomerController extends BaseController
         $customer = $this->customerModel->find($id);
         if (!$customer) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/customers')->with('error', 'Data pelanggan tidak ditemukan.');
+                return redirect()->to('/customers')->with('error', 'Customer not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Data pelanggan tidak ditemukan.',
+                'message' => 'Customer not found.',
             ])->setStatusCode(404);
         }
 
@@ -150,7 +150,7 @@ class CustomerController extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Validasi gagal: pastikan nama dan nomor HP valid.');
+                return redirect()->back()->withInput()->with('error', 'Enter a valid name and mobile number.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -168,12 +168,12 @@ class CustomerController extends BaseController
         $updatedCustomer = $this->customerModel->find($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/customers')->with('success', 'Data pelanggan berhasil diperbarui.');
+            return redirect()->to('/customers')->with('success', 'Customer updated successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Data pelanggan berhasil diperbarui.',
+            'message' => 'Customer updated successfully.',
             'data'    => $updatedCustomer,
         ]);
     }
@@ -186,23 +186,23 @@ class CustomerController extends BaseController
         $customer = $this->customerModel->find($id);
         if (!$customer) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/customers')->with('error', 'Data pelanggan tidak ditemukan.');
+                return redirect()->to('/customers')->with('error', 'Customer not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Data pelanggan tidak ditemukan.',
+                'message' => 'Customer not found.',
             ])->setStatusCode(404);
         }
 
         $this->customerModel->delete($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/customers')->with('success', 'Data pelanggan berhasil dihapus (soft delete).');
+            return redirect()->to('/customers')->with('success', 'Customer archived successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Data pelanggan berhasil dihapus (soft delete).',
+            'message' => 'Customer archived successfully.',
         ]);
     }
 }

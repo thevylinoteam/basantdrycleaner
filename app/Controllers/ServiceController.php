@@ -61,7 +61,7 @@ class ServiceController extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Validasi gagal: lengkapi nama, tarif, dan durasi.');
+                return redirect()->back()->withInput()->with('error', 'Enter a valid service name, price and duration.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -82,12 +82,12 @@ class ServiceController extends BaseController
         $newService = $this->serviceModel->find($serviceId);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/services')->with('success', 'Paket layanan berhasil ditambahkan.');
+            return redirect()->to('/services')->with('success', 'Service added successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Layanan berhasil ditambahkan.',
+            'message' => 'Service added successfully.',
             'data'    => $newService,
         ])->setStatusCode(201);
     }
@@ -100,11 +100,11 @@ class ServiceController extends BaseController
         $service = $this->serviceModel->find($id);
         if (!$service) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/services')->with('error', 'Layanan tidak ditemukan.');
+                return redirect()->to('/services')->with('error', 'Service not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Layanan tidak ditemukan.',
+                'message' => 'Service not found.',
             ])->setStatusCode(404);
         }
 
@@ -119,7 +119,7 @@ class ServiceController extends BaseController
 
         if (!$this->validate($rules)) {
             if (!$this->wantsJson()) {
-                return redirect()->back()->withInput()->with('error', 'Validasi gagal: format input tidak valid.');
+                return redirect()->back()->withInput()->with('error', 'Invalid input.');
             }
             return $this->response->setJSON([
                 'status' => 'error',
@@ -142,12 +142,12 @@ class ServiceController extends BaseController
         $updated = $this->serviceModel->find($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/services')->with('success', 'Paket layanan berhasil diperbarui.');
+            return redirect()->to('/services')->with('success', 'Service updated successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Layanan berhasil diperbarui.',
+            'message' => 'Service updated successfully.',
             'data'    => $updated,
         ]);
     }
@@ -160,23 +160,23 @@ class ServiceController extends BaseController
         $service = $this->serviceModel->find($id);
         if (!$service) {
             if (!$this->wantsJson()) {
-                return redirect()->to('/services')->with('error', 'Layanan tidak ditemukan.');
+                return redirect()->to('/services')->with('error', 'Service not found.');
             }
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Layanan tidak ditemukan.',
+                'message' => 'Service not found.',
             ])->setStatusCode(404);
         }
 
         $this->serviceModel->delete($id);
 
         if (!$this->wantsJson()) {
-            return redirect()->to('/services')->with('success', 'Layanan berhasil dihapus.');
+            return redirect()->to('/services')->with('success', 'Service archived successfully.');
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Layanan berhasil dihapus.',
+            'message' => 'Service archived successfully.',
         ]);
     }
 }
