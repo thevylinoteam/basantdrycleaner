@@ -1,0 +1,25 @@
+# Hostinger fallback when the document root is the repository root.
+# Preferred deployment: set the document root to the public/ directory.
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Keep application files, credentials, backups and dependencies private.
+    RewriteRule ^(?:app|vendor|writable|tests|builds|\.git|\.github)(?:/|$) - [F,L,NC]
+    RewriteRule ^(?:env|composer\.(?:json|lock)|db_laundry\.sql|phpunit\.dist\.xml|preload\.php|spark)(?:/|$) - [F,L,NC]
+    RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L]
+
+    # Allow certificate renewal challenges to remain accessible.
+    RewriteRule ^\.well-known/acme-challenge/ - [L]
+
+    # Internal requests already mapped to public/ must not be rewritten again.
+    RewriteRule ^public(?:/|$) - [L]
+    RewriteRule ^$ public/index.php [L]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
