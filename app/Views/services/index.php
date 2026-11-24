@@ -10,9 +10,15 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Services & Pricing</h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Manage services, prices, units and turnaround times</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Manage services, prices, units and turnaround times. Ranged services use their starting rate until staff sets the final price.</p>
         </div>
-        <div>
+        <div class="flex flex-wrap items-center gap-2">
+            <?php if (session()->get('userRole') === 'admin'): ?>
+                <form method="POST" action="<?= base_url('services/import-basant') ?>" onsubmit="return confirm('Add missing Basant services? Existing rates will not be changed. Ranges use starting rates and turnaround defaults to 24 hours.');">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl"><i data-lucide="download" class="w-4 h-4"></i> Import Basant Catalogue</button>
+                </form>
+            <?php endif; ?>
             <button type="button" @click="addModalOpen = true" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all">
                 <i data-lucide="plus-circle" class="w-4 h-4"></i>
                 Add Service
@@ -64,7 +70,7 @@
                                         $tBadge = $typeBadges[$s['type']] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold capitalize <?= $tBadge ?>">
-                                        <?= esc($s['type']) ?>
+                                        <?= esc(basant_label($s['type'])) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 font-mono uppercase text-gray-500 dark:text-gray-400">

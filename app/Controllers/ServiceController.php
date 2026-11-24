@@ -45,6 +45,30 @@ class ServiceController extends BaseController
         ]);
     }
 
+    /** Import the approved Basant catalogue on an existing installation. */
+    public function importBasant()
+    {
+        if (session()->get('userRole') !== 'admin') {
+            return $this->response->setStatusCode(403)->setBody('Administrator access required.');
+        }
+        try {
+            $count = \App\Libraries\BasantCatalogue::import(\Config\Database::connect());
+            return redirect()->to('/services')->with('success', $count . ' Basant services added. Existing services and prices were retained.');
+        } catch (\Throwable $e) {
+            log_message('error', 'Basant catalogue import failed: {message}', ['message' => $e->getMessage()]);
+            return redirect()->to('/services')->with('error', 'Could not import the catalogue. No partial import was retained.');
+        }
+    }
+
+    public function edit(int $id)
+    {
+        $service = $this->serviceModel->find($id);
+        if (!$service) {
+            return redirect()->to('/services')->with('error', 'Service not found.');
+        }
+        return view('services/edit', ['service' => $service]);
+    }
+
     /**
      * Store new service
      */

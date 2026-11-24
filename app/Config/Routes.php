@@ -44,6 +44,8 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) {
     // Layanan & Tarif (Service Management)
     $routes->get('/services', 'ServiceController::index');
     $routes->post('/services/store', 'ServiceController::store');
+    $routes->post('/services/import-basant', 'ServiceController::importBasant');
+    $routes->get('/services/edit/(:num)', 'ServiceController::edit/$1');
     $routes->post('/services/update/(:num)', 'ServiceController::update/$1');
     $routes->post('/services/delete/(:num)', 'ServiceController::delete/$1');
 
