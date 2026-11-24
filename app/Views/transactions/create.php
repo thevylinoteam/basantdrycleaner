@@ -47,18 +47,18 @@
         this.paymentAmount = this.getTotalPrice();
     },
     formatRupiah(num) {
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num || 0);
+        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(num || 0);
     }
 }">
     <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Buat Transaksi Baru</h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Pilih pelanggan dan tentukan layanan laundry yang dipesan</p>
+            <h1 class="text-2xl font-bold text-navy-700 dark:text-white font-poppins tracking-tight">Create New Order</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Select a customer and requested services</p>
         </div>
         <a href="<?= base_url('transactions') ?>" class="text-xs font-bold text-brand-500 hover:text-brand-600 flex items-center gap-1">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            Kembali ke Daftar
+            Back ke Daftar
         </a>
     </div>
 
@@ -73,22 +73,22 @@
                     <div class="w-8 h-8 rounded-full bg-brand-50 dark:bg-brand-900/40 text-brand-500 font-bold text-xs flex items-center justify-center">
                         1
                     </div>
-                    <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Pilih Data Pelanggan</h3>
+                    <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Select Customer</h3>
                 </div>
                 <a href="<?= base_url('customers/create') ?>" target="_blank" class="text-xs text-brand-500 hover:text-brand-600 font-bold flex items-center gap-1">
                     <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-                    + Pelanggan Baru
+                    + Customer Baru
                 </a>
             </div>
 
             <div>
-                <label for="customer_id" class="block text-xs font-bold text-navy-700 dark:text-white mb-2">Pelanggan <span class="text-brand-500">*</span></label>
+                <label for="customer_id" class="block text-xs font-bold text-navy-700 dark:text-white mb-2">Customer <span class="text-brand-500">*</span></label>
                 <select name="customer_id" id="customer_id" required x-model="customerId" class="w-full px-4 py-3 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                    <option value="">-- Pilih Pelanggan Terdaftar --</option>
+                    <option value="">-- Select a Customer --</option>
                     <?php if (!empty($customers)): ?>
                         <?php foreach ($customers as $c): ?>
                             <option value="<?= $c['id'] ?>">
-                                <?= esc($c['name']) ?> (<?= esc($c['phone']) ?>) - <?= esc($c['address'] ?? 'Alamat -') ?>
+                                <?= esc($c['name']) ?> (<?= esc($c['phone']) ?>) - <?= esc($c['address'] ?? 'Address -') ?>
                             </option>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -103,11 +103,11 @@
                     <div class="w-8 h-8 rounded-full bg-brand-50 dark:bg-brand-900/40 text-brand-500 font-bold text-xs flex items-center justify-center">
                         2
                     </div>
-                    <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Item Layanan Laundry</h3>
+                    <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Order Items</h3>
                 </div>
                 <button type="button" @click="addItem()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-brand-50 dark:hover:bg-navy-600 text-brand-500 dark:text-brand-300 text-xs font-bold transition-colors">
                     <i data-lucide="plus" class="w-4 h-4"></i>
-                    Tambah Baris Item
+                    Add Baris Item
                 </button>
             </div>
 
@@ -118,7 +118,7 @@
                         <div class="flex-1">
                             <label class="block text-xs font-bold text-navy-700 dark:text-gray-300 mb-1.5" x-text="'Layanan #' + (index + 1)"></label>
                             <select :name="'items[' + index + '][service_id]'" x-model="item.service_id" @change="onServiceChange(index)" required class="w-full px-3.5 py-2.5 bg-white dark:bg-navy-800 border border-gray-200 dark:border-navy-700 rounded-xl text-xs font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                                <option value="">-- Pilih Paket Layanan --</option>
+                                <option value="">-- Select a Service --</option>
                                 <template x-for="svc in servicesList" :key="svc.id">
                                     <option :value="svc.id" x-text="svc.name + ' (' + formatRupiah(svc.price) + '/' + svc.unit + ')'"></option>
                                 </template>
@@ -150,7 +150,7 @@
             <!-- Grand Total Bar -->
             <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 text-white flex items-center justify-between shadow-lg shadow-brand-500/20">
                 <div>
-                    <span class="text-xs text-brand-100 block font-medium">Grand Total Tagihan:</span>
+                    <span class="text-xs text-brand-100 block font-medium">Grand Total:</span>
                     <span class="text-xl sm:text-2xl font-bold font-poppins" x-text="formatRupiah(getTotalPrice())"></span>
                 </div>
                 <div class="text-right text-xs text-brand-100 font-medium">
@@ -165,43 +165,43 @@
                 <div class="w-8 h-8 rounded-full bg-brand-50 dark:bg-brand-900/40 text-brand-500 font-bold text-xs flex items-center justify-center">
                     3
                 </div>
-                <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Pembayaran & Catatan Khusus</h3>
+                <h3 class="text-sm font-bold text-navy-700 dark:text-white font-poppins">Payment & Special Instructions</h3>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <div class="flex items-center justify-between mb-1.5">
-                        <label for="payment_amount" class="block text-xs font-bold text-navy-700 dark:text-white">Jumlah Bayar Sekarang (Rp)</label>
+                        <label for="payment_amount" class="block text-xs font-bold text-navy-700 dark:text-white">Amount Paid Now (₹)</label>
                         <button type="button" @click="setFullPayment()" class="text-xs font-bold text-brand-500 hover:underline">
-                            Bayar Lunas
+                            Bayar Paid
                         </button>
                     </div>
-                    <input type="number" name="payment_amount" id="payment_amount" x-model="paymentAmount" min="0" step="1000" placeholder="0" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-mono text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                    <p class="text-[11px] text-gray-400 mt-1">Kosongkan jika bayar saat cucian selesai/diambil.</p>
+                    <input type="number" name="payment_amount" id="payment_amount" x-model="paymentAmount" min="0" step="0.01" placeholder="0" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-mono text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
+                    <p class="text-[11px] text-gray-400 mt-1">Leave blank to pay on collection.</p>
                 </div>
 
                 <div>
-                    <label for="payment_method" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Metode Pembayaran</label>
+                    <label for="payment_method" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Payment Method</label>
                     <select name="payment_method" id="payment_method" x-model="paymentMethod" class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm font-medium text-navy-700 dark:text-white focus:outline-none focus:border-brand-500">
-                        <option value="tunai">Tunai / Cash</option>
-                        <option value="transfer">Transfer Bank / QRIS</option>
+                        <option value="tunai">Cash / Cash</option>
+                        <option value="transfer">Bank Transfer / UPI</option>
                     </select>
                 </div>
             </div>
 
             <div>
-                <label for="notes" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Catatan Khusus Cucian (Opsional)</label>
-                <textarea name="notes" id="notes" rows="2" placeholder="Contoh: Pisahkan pakaian putih, jangan gunakan parfum berlebih..." class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm text-navy-700 dark:text-white focus:outline-none focus:border-brand-500"></textarea>
+                <label for="notes" class="block text-xs font-bold text-navy-700 dark:text-white mb-1.5">Special Instructions (Optional)</label>
+                <textarea name="notes" id="notes" rows="2" placeholder="Example: Separate white garments; avoid strong fragrance..." class="w-full px-3.5 py-2.5 bg-lightPrimary dark:bg-navy-900 border border-transparent dark:border-navy-700 rounded-xl text-sm text-navy-700 dark:text-white focus:outline-none focus:border-brand-500"></textarea>
             </div>
 
             <!-- Submit Button -->
             <div class="pt-4 flex justify-end gap-3 border-t border-gray-100 dark:border-white/10">
                 <a href="<?= base_url('transactions') ?>" class="px-5 py-2.5 rounded-xl bg-lightPrimary dark:bg-navy-700 hover:bg-gray-200 text-gray-600 dark:text-gray-300 text-xs font-bold transition-colors">
-                    Batal
+                    Cancel
                 </a>
                 <button type="submit" class="px-6 py-2.5 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-brand-500/25 transition-all flex items-center gap-2">
                     <i data-lucide="check-circle" class="w-4 h-4"></i>
-                    Simpan Order & Terbitkan Nota
+                    Save Order & Terbitkan Nota
                 </button>
             </div>
         </div>
